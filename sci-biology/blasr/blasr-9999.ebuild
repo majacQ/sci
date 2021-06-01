@@ -1,30 +1,26 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-MY_HASH=885c33a
-
-inherit git-r3
+inherit meson git-r3
 
 DESCRIPTION="The PacBio long read aligner"
 HOMEPAGE="http://www.smrtcommunity.com/SMRT-Analysis/Algorithms/BLASR"
-#SRC_URI="https://github.com/PacificBiosciences/blasr/tarball/${PV} -> ${P}.tar.gz"
-SRC_URI=""
 EGIT_REPO_URI="https://github.com/PacificBiosciences/blasr.git"
+#SRC_URI="https://github.com/PacificBiosciences/blasr/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="blasr"
 SLOT="0"
-IUSE=""
 KEYWORDS=""
 
-DEPEND="sci-libs/hdf5[cxx]"
-RDEPEND=""
-
-S="${WORKDIR}/blasr-${MY_HASH}"
-
-src_install() {
-	dodir /usr/bin
-	emake install ASSEMBLY_HOME="${ED}/usr"
-}
+BDEPEND="
+	dev-util/cmake
+	virtual/pkgconfig
+"
+DEPEND="
+	sci-biology/pbbam
+	sci-biology/libblasr
+	dev-libs/boost:=[threads]
+"
+RDEPEND="${DEPEND}"

@@ -1,18 +1,18 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-inherit cmake-utils
+inherit cmake flag-o-matic
 
 DESCRIPTION="Computing information projections iteratively"
-HOMEPAGE="http://github.com/tom111/cipi"
+HOMEPAGE="https://github.com/tom111/cipi"
 SRC_URI="https://github.com/tom111/cipi/archive/1.0.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
+
 IUSE="doc"
 
 DEPEND="
@@ -24,12 +24,17 @@ DOCS="AUTHORS README"
 
 CMAKE_IN_SOURCE_BUILD="yes"
 
+src_prepare() {
+	cmake_src_prepare
+	append-ldflags -Wl,--copy-dt-needed-entries
+}
+
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_enable doc)
+		$(use_enable doc)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {

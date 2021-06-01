@@ -1,23 +1,20 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-DESCRIPTION="Customized version of megablast from TIGR Gene Indices project used by tgicl and gicl utilities"
-HOMEPAGE="http://compbio.dfci.harvard.edu/tgi/software/"
-SRC_URI="ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/tgicl/mgblast.tar.gz"
+DESCRIPTION="Customized version of megablast from TIGR Gene Indices project"
+HOMEPAGE="https://web.archive.org/web/20140726030702/http://compbio.dfci.harvard.edu/tgi/software/"
+SRC_URI="ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/tgicl/mgblast.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Artistic"
 SLOT="0"
-KEYWORDS="" # upstream binary is provided by sci-biology/tgicl currently
-#KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS=""
 
 DEPEND="sci-biology/ncbi-tools"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}"
+S="${WORKDIR}/${PN}"
 
 # mgblast needs old version of ncbi-tools unpacked and compiled during its own compilation
 # from newer tools you need to include blfmtutl.h but the next error is no go for me:
@@ -27,20 +24,11 @@ S="${WORKDIR}"
 
 src_prepare(){
 	# mgblast cannot be compiled against newer ncbi-tools but let's try
-	mv mgblast/makefile mgblast/Makefile 2>/dev/null || true
-	sed -i 's#/usr/local/projects/tgi/ncbitoolkit/ncbi#/usr#' mgblast/Makefile || die
-	sed -i 's#NCBIDIR = /mylocal/src/ncbi#NCBIDIR = /usr#' mgblast/Makefile || die
-	sed -i 's#NCBI_INCDIR = .*#NCBI_INCDIR = /usr/include/ncbi#' mgblast/Makefile || die
-	sed -i 's#NCBI_LIBDIR = .*#NCBI_LIBDIR = /usr/lib#' mgblast/Makefile || die # a PATH to NCBI-TOOLKIT (/usr/lib) while NOT /usr/lib/ncbi-tools++ !
-	sed -i "s#-I-#-iquote#" mgblast/Makefile || die
-}
-
-src_compile(){
-	cd "${S}"/mgblast || die
+	mv makefile Makefile 2>/dev/null || true
+	sed -i -e 's#/usr/local/projects/tgi/ncbitoolkit/ncbi#/usr#' \
+		-e's#NCBIDIR = /mylocal/src/ncbi#NCBIDIR = /usr#' \
+		-e's#NCBI_INCDIR = .*#NCBI_INCDIR = /usr/include/ncbi#' \
+		-e 's#NCBI_LIBDIR = .*#NCBI_LIBDIR = /usr/lib#' \
+		-e "s#-I-#-iquote#" Makefile || die # a PATH to NCBI-TOOLKIT (/usr/lib) while NOT /usr/lib/ncbi-tools++ !
 	default
-}
-
-src_install(){
-	cd "${S}"/mgblast || die
-	dobin mgblast
 }

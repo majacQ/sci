@@ -1,38 +1,38 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-inherit eutils
+inherit fortran-2
 
 MY_PN="FoX"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="A library designed to allow the easy use of XML from Fortran"
-HOMEPAGE="http://www1.gly.bris.ac.uk/~walker/FoX/"
+HOMEPAGE="https://homepages.see.leeds.ac.uk/~earawa/FoX//"
 
 LICENSE="BSD ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux"
 IUSE="debug doc +dom +fast +sax +wcml +wkml +wxml"
 
-SRC_URI=" doc? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-full.tar.gz )
+SRC_URI="
+	doc? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-full.tar.gz )
 	!doc? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}.tar.gz
 		dom? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-dom.tar.gz )
 		sax? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-sax.tar.gz )
 		wcml? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-wcml.tar.gz )
 		wkml? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-wkml.tar.gz )
-		wxml? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-wxml.tar.gz ) )"
+		wxml? ( http://www1.gly.bris.ac.uk/~walker/FoX/source/${MY_P}-wxml.tar.gz ) )
+"
 
 S="${WORKDIR}/${MY_P}"
 
 FORTRAN_STANDARD=90
 
-src_prepare() {
-	epatch "${FILESDIR}"/4.1.2-r2-install-customizations.patch
-}
-
+PATCHES=(
+	"${FILESDIR}"/4.1.2-r2-install-customizations.patch
+)
 src_configure() {
 		econf --prefix="${EPREFIX}/usr" \
 		$(use_enable debug) \
@@ -64,6 +64,6 @@ src_install() {
 	dodoc README.FoX.txt
 	if use doc; then
 		dodoc Changelog
-		dohtml -r DoX/
+		dodoc -r DoX/
 	fi
 }

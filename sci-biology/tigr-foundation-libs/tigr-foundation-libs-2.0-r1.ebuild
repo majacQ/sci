@@ -1,13 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
-
-inherit eutils
+EAPI=7
 
 DESCRIPTION="TIGR Foundation for C++"
-HOMEPAGE="http://sourceforge.net/apps/mediawiki/amos/index.php?title=AutoEditor"
+HOMEPAGE="https://sourceforge.net/projects/amos/"
 SRC_URI="ftp://ftp.cbcb.umd.edu/pub/software/autoEditor/autoEditor-1.20.tar.gz"
 
 # the one bundled in autoEditor-1.20/TigrFoundation-2.0/ is same with the one in bambus
@@ -16,15 +13,18 @@ SRC_URI="ftp://ftp.cbcb.umd.edu/pub/software/autoEditor/autoEditor-1.20.tar.gz"
 LICENSE="Artistic"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
-S="${WORKDIR}"/autoEditor-1.20/TigrFoundation-2.0
+S="${WORKDIR}/autoEditor-1.20/TigrFoundation-2.0"
+
+PATCHES=(
+	"${FILESDIR}/TigrFoundation-all-patches.patch"
+)
 
 src_prepare(){
-	epatch "${FILESDIR}"/TigrFoundation-all-patches.patch
-	sed -i "s:/export/usr/local:${D}/usr:g" Makefile || die
+	sed -i "s:/export/usr/local:${ED}/usr:g" Makefile || die
+	default
 }
 
 src_install(){
-	emake install DESTDIR="${D}/usr"
+	emake install DESTDIR="${ED}/usr" # Makefile does not respect DESTDIR
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <maintainer type="person">
-    <email>jlec@gentoo.org</email>
-  </maintainer>
-  <maintainer type="project">
-    <email>sci-chemistry@gentoo.org</email>
-    <name>Gentoo Chemistry Project</name>
-  </maintainer>
-  <longdescription>
+	<maintainer type="person">
+		<email>jlec@gentoo.org</email>
+	</maintainer>
+	<maintainer type="project">
+		<email>sci-chemistry@gentoo.org</email>
+		<name>Gentoo Chemistry Project</name>
+	</maintainer>
+	<longdescription>
 It has been estimated that more than 20% of the proteins in the BMRB are 
 improperly referenced and that about 1% of all chemical shift assignments are 
 mis-assigned. These statistics also reflect the likelihood that any newly 
@@ -26,8 +26,8 @@ protocol, which is based on using residue-specific and secondary
 structure-specific chemical shift distributions calculated over 
 small (3–6 residue) fragments to identify mis-assigned resonances. The method 
 is also able to identify and re-reference mis-referenced chemical shift 
- assignments. Comparisons against existing re-referencing or mis-assignment 
- detection programs show that the method is as good or superior to existing 
- approaches.
+assignments. Comparisons against existing re-referencing or mis-assignment 
+detection programs show that the method is as good or superior to existing 
+approaches.
 </longdescription>
 </pkgmetadata>

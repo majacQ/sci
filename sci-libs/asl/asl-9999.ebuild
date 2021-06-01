@@ -1,48 +1,44 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 MY_PN=ASL
-
-if [[ ${PV} == "9999" ]] ; then
-	inherit git-r3
-	EGIT_REPO_URI="git://github.com/AvtechScientific/${MY_PN}.git"
-else
-	SRC_URI="https://github.com/AvtechScientific/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${MY_PN}-${PV}"
-fi
-
-CMAKE_MIN_VERSION=3.0.2
 CMAKE_MAKEFILE_GENERATOR="${CMAKE_MAKEFILE_GENERATOR:-ninja}"
 
-inherit cmake-utils
+inherit cmake git-r3
 
-DESCRIPTION="Advanced Simulation Library - multiphysics simulation software package"
+DESCRIPTION="Hardware accelerated multiphysics simulation platform"
 HOMEPAGE="http://asl.org.il/"
+EGIT_REPO_URI="git://github.com/AvtechScientific/${MY_PN}.git"
+
 LICENSE="AGPL-3"
 SLOT="0"
-IUSE="doc examples matio"
+IUSE="doc examples matlab"
 
 RDEPEND="
-	>=dev-libs/boost-1.55:=
+	>=dev-libs/boost-1.53:=
 	>=sci-libs/vtk-6.1
 	>=virtual/opencl-0-r2
 "
 DEPEND="${RDEPEND}
-	doc? ( app-doc/doxygen[dot] )
-	matio? ( >=sci-libs/matio-1.5.2 )
+	matlab? ( >=sci-libs/matio-1.5.2 )
 "
+BDEPEND="doc? ( app-doc/doxygen[dot] )"
+
+src_prepare() {
+	cmake_src_prepare
+	# allow use of vtk 8.2
+	sed -i -e 's/find_package(VTK 7.0/find_package(VTK 8.2/g' CMakeLists.txt || die
+}
 
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_DOCDIR=/usr/share/doc/${PF}
 		-DCMAKE_SKIP_RPATH=yes
-		$(cmake-utils_use_with doc API_DOC)
-		$(cmake-utils_use_with examples)
-		$(cmake-utils_use_with matio)
+		-DWITH_API_DOC="$(usex doc)"
+		-DWITH_EXAMPLES="$(usex examples)"
+		-DWITH_MATIO="$(usex matlab)"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }

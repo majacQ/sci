@@ -1,18 +1,15 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-DESCRIPTION="genome annotation tool: view, modify, and store annotation for prokaryotic and eukaryotic genomes"
+DESCRIPTION="Genome annotation tool"
 HOMEPAGE="http://manatee.sourceforge.net/jcvi/downloads.shtml"
-SRC_URI="http://downloads.sourceforge.net/project/manatee/manatee/manatee-2.4.3/manatee-2.4.3.tgz"
+SRC_URI="http://downloads.sourceforge.net/project/manatee/manatee/manatee-${PV}/manatee-2.4.3.tgz"
 
 LICENSE="Artistic-Manatee"
 SLOT="0"
 KEYWORDS=""
-#KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND=">=dev-libs/expat-1.95.8
 		>=media-libs/gd-2.0.34
@@ -31,16 +28,20 @@ DEPEND=">=dev-libs/expat-1.95.8
 		dev-perl/Log-Log4perl
 		dev-perl/Log-Cabin
 		dev-perl/IO-Tee
-		dev-perl/MLDBM"
-		#dev-perl/CGI
-		#dev-perl/CGI-Carp
-		#dev-perl/CGI-Cookie
-		#dev-perl/GD-Text
-		#dev-perl/GD-Graph
-		#dev-perl/Date-Manip
+		dev-perl/MLDBM
+		dev-perl/CGI
+		dev-perl/DBI
+		dev-perl/Apache-DBI
+		dev-perl/Date-Manip
+"
+# 		dev-perl/CGI-Carp
+# 		dev-perl/CGI-Cookie
+# 		dev-perl/GD-Text
+# 		dev-perl/GD-Graph
+#
 RDEPEND="${DEPEND}
-		>=virtual/mysql-5:*
-		>=www-servers/apache-2.2"
+	>=virtual/mysql-5:*
+	>=www-servers/apache-2.2"
 
 S="${WORKDIR}"/manatee-"${PV}"
 

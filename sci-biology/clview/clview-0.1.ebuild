@@ -1,13 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="clview is an assembly .ace file viewer from TIGR Gene Indices project tools"
-HOMEPAGE="http://sourceforge.net/projects/clview"
+HOMEPAGE="https://sourceforge.net/projects/clview"
 SRC_URI="
-	http://sourceforge.net/projects/clview/files/source%20code/clview_src.tar.gz
+	https://sourceforge.net/projects/clview/files/source%20code/clview_src.tar.gz
 	ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/clview/clview_src.tar.gz
 	ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/clview/clview_linux_i386.tar.gz"
 
@@ -58,12 +57,11 @@ SRC_URI="
 # -rw-r--r-- 1 mmokrejs mmokrejs  6941 Nov  7  2005 gcdb.h
 # -rw-r--r-- 1 mmokrejs mmokrejs  8998 Nov  7  2005 gcompress.cpp
 # -rw-r--r-- 1 mmokrejs mmokrejs  3670 Nov  7  2005 gcompress.h
-# 
+#
 
 LICENSE="Artistic"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 DEPEND="=x11-libs/fox-1.6*"
 RDEPEND="${DEPEND}"
@@ -75,6 +73,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	default
 	# FIXME: we have to run `/usr/bin/fox-config --cflags' to yield
 	#        `-I/usr/include/fox-1.6'
 	# similarly `fox-config --libs' to yield e.g.

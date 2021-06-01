@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Prediction of transmembrane helices in proteins"
 HOMEPAGE="http://www.cbs.dtu.dk/services/TMHMM/"
@@ -18,10 +17,11 @@ S="TMHMM${PV}"
 
 pkg_nofetch() {
 	einfo "Please visit ${HOMEPAGE} and obtain the file"
-	einfo "\"${SRC_URI}\", then place it in ${DISTDIR}"
+	einfo "\"${SRC_URI}\", then place it into your DISTDIR folder"
 }
 
 src_prepare() {
+	default
 	sed -i '1 i #!/usr/bin/env perl' "${S}"/bin/tmhmm* || die
 	sed -i '1 a $opt_basedir = "/opt/tmhmm";' "${S}"/bin/tmhmm || die
 }
@@ -29,8 +29,11 @@ src_prepare() {
 src_install() {
 	exeinto /opt/${PN}/bin
 	doexe bin/*
+
 	insinto /opt/${PN}/lib
 	doins lib/*
-	dosym /opt/${PN}/bin/tmhmm /usr/bin/tmhmm
+
+	dosym ../${PN}/bin/tmhmm /opt/bin/tmhmm
+
 	dodoc README TMHMM2.0.html
 }

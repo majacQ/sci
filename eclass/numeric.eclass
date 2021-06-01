@@ -1,6 +1,5 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # @ECLASS: numeric.eclass
 # @MAINTAINER:
@@ -10,14 +9,14 @@
 # Various functions which make the maintenance  numerical algebra packages
 # easier.
 
-case ${EAPI:-0} in
-	0|1|2|3|4|5) ;;
-	*) die "EAPI=${EAPI} is not supported" ;;
-esac
-
 if [[ ! ${_NUMERIC_ECLASS} ]]; then
 
-inherit multilib
+case ${EAPI:-0} in
+	0|1|2|3|4|5)
+		inherit multilib ;;
+	6|7) ;;
+	*) die "EAPI=${EAPI} is not supported" ;;
+esac
 
 # @VARIABLE: NUMERIC_MODULE_NAME
 # @DESCRIPTION:
@@ -126,9 +125,9 @@ create_pkgconfig() {
 	Requires: ${pcrequires}
 	Requires.private: ${pcrequirespriv}
 	Conflicts: ${pcconflicts}
-	Libs: -L"${pclibdir}" ${pclibs}
+	Libs: -L\${libdir} ${pclibs}
 	Libs.private: ${pclibspriv}
-	Cflags: -I"${pcincldir}" ${pccflags}
+	Cflags: -I\${includedir} ${pccflags}
 	EOF
 
 	insinto /usr/$(get_libdir)/pkgconfig

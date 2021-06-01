@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-# @ECLASS: numeric-int64-multilib.eclass
+# @ECLASS: numeric-int64-multibuild.eclass
 # @MAINTAINER:
 # sci team <sci@gentoo.org>
 # @AUTHOR:
@@ -10,7 +9,7 @@
 # Author: Justin Lecher <jlec@gentoo.org>
 # @BLURB: Build functions for Fortran multilib int64 multibuild packages
 # @DESCRIPTION:
-# The numeric-int64-multilib.eclass exports USE flags and utility functions
+# The numeric-int64-multibuild.eclass exports USE flags and utility functions
 # necessary to build packages for multilib int64 multibuild in a clean
 # and uniform manner.
 
@@ -19,12 +18,10 @@ if [[ ! ${_NUMERIC_INT64_MULTILIB_ECLASS} ]]; then
 # EAPI=5 is required for meaningful MULTILIB_USEDEP.
 case ${EAPI:-0} in
 	5)
-		inherit multilib
-		;;
+		inherit multilib ;;
+	6|7) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
-
-MULTILIB_COMPAT=( abi_x86_{32,64} )
 
 inherit alternatives-2 eutils fortran-2 multilib-build numeric toolchain-funcs
 
@@ -125,9 +122,9 @@ numeric-int64_get_module_name() {
 	fi
 	# choose posix threads over openmp when the two are set
 	# yet to see the need of having the two profiles simultaneously
-	if use_if_iuse threads; then
+	if in_iuse threads && use threads; then
 		module_name+="-threads"
-	elif use_if_iuse openmp; then
+	elif in_iuse openmp && use openmp; then
 		module_name+="-openmp"
 	fi
 	echo "${module_name}"
@@ -242,7 +239,7 @@ numeric-int64_get_multibuild_int_variants() {
 	debug-print-function ${FUNCNAME} "${@}"
 	local MULTIBUILD_VARIANTS=( int32 ) variant
 
-	use_if_iuse int64 && MULTIBUILD_VARIANTS+=( int64 )
+	in_iuse int64 && use int64 && MULTIBUILD_VARIANTS+=( int64 )
 
 	echo "${MULTIBUILD_VARIANTS[@]}"
 }
@@ -254,7 +251,7 @@ numeric-int64_get_multibuild_int_variants() {
 numeric-int64_get_multibuild_variants() {
 	debug-print-function ${FUNCNAME} "${@}"
 	local MULTIBUILD_VARIANTS=$(numeric-int64_get_multibuild_int_variants)
-	if use_if_iuse static-libs; then
+	if in_iuse static-libs && use static-libs; then
 		for variant in ${MULTIBUILD_VARIANTS[@]}; do
 			MULTIBUILD_VARIANTS+=( static_${variant} )
 		done
@@ -270,7 +267,7 @@ numeric-int64_get_all_abi_variants() {
 	debug-print-function ${FUNCNAME} "${@}"
 	local abi ret=() variant
 
-	for abi in $(multilib_get_enabled_abis); do
+	for abi in $(multilib_get_enabled_abi_pairs); do
 		for variant in $(numeric-int64_get_multibuild_variants); do
 			if [[ ${variant} =~ int64 ]]; then
 				[[ ${abi} =~ amd64 ]] && ret+=( ${abi}_${variant} )
@@ -348,10 +345,28 @@ numeric-int64-multibuild_install_alternative() {
 # @CODE
 numeric-int64-multibuild_multilib_wrapper() {
 	debug-print-function ${FUNCNAME} "${@}"
-	local v="${MULTIBUILD_VARIANT/_${NUMERIC_INT32_SUFFIX}/}"
-	local v="${v/_${NUMERIC_INT64_SUFFIX}/}"
-	local ABI="${v/_${NUMERIC_STATIC_SUFFIX}/}"
+
+	local v="${MULTIBUILD_VARIANT%_*}"
+	# MULTIBUILD_VARIANT could be abi_x86_64.amd64_static_int32
+	v=${v%_${NUMERIC_STATIC_SUFFIX}}
+	local ABI="${v#*.}"
+	# hack: our int64 and int32 ABIs can correspond to the same ABI
+	# in multilib, resulting in multiple sed replacements of headers
+	# and thus error like "Flag not listed in wrapper template."
+	# Using MULTILIB_ABI_FLAG="${ABI}", the corresponding header
+	# is ignored.
+	local MULTILIB_ABI_FLAG
+	case ${MULTIBUILD_VARIANT} in
+	*_${NUMERIC_STATIC_SUFFIX}*|*_${NUMERIC_INT64_SUFFIX})
+		MULTILIB_ABI_FLAG="${ABI}"
+		;;
+	*_${NUMERIC_INT32_SUFFIX})
+		MULTILIB_ABI_FLAG="${v%.*}"
+		;;
+	esac
+
 	multilib_toolchain_setup "${ABI}"
+	readonly ABI
 	"${@}" || die
 }
 

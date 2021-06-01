@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 JAVA_PKG_IUSE="doc source test"
 WANT_ANT_TASKS="ant-antlr ant-contrib dev-java/cpptasks:0"
@@ -10,13 +9,12 @@ WANT_ANT_TASKS="ant-antlr ant-contrib dev-java/cpptasks:0"
 inherit java-pkg-2 java-ant-2
 
 DESCRIPTION="Automatically generate the JNI code necessary to call C libraries"
-HOMEPAGE="http://jogamp.org/gluegen/www/"
+HOMEPAGE="https://jogamp.org/gluegen/www/"
 SRC_URI="https://github.com/sgothel/gluegen/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="2.2"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 COMMON_DEP="
 	dev-java/ant-core:0
@@ -43,9 +41,15 @@ EANT_TEST_GENTOO_CLASSPATH="${EANT_GENTOO_CLASSPATH},junit-4"
 EANT_GENTOO_CLASSPATH_EXTRA="${S}/build/${PN}{,-rt}.jar"
 EANT_EXTRA_ARGS="-Dc.strip.libraries=false"
 
-java_prepare() {
+PATCHES=(
+	"${FILESDIR}/${PV}-dont-copy-jars.patch"
+	"${FILESDIR}/${PV}-dont-strip.patch"
+	"${FILESDIR}/${PV}-dont-test-archive.patch"
+)
+
+src_prepare() {
 	rm -rf make/lib
-	epatch "${FILESDIR}"/${PV}-*.patch
+	default
 	java-ant_bsfix_files "${S}/make/build-test.xml"
 }
 
@@ -57,7 +61,7 @@ src_install() {
 	java-pkg_dojar build/${PN}{,-rt}.jar
 	java-pkg_doso build/obj/*.so
 
-	use doc && dohtml -r doc/manual
+	use doc && dodoc -r doc/manual
 	use source && java-pkg_dosrc src/java/*
 
 	# for building jogl

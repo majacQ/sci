@@ -1,36 +1,36 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-PERL_EXPORT_PHASE_FUNCTIONS=no
-inherit perl-module eutils toolchain-funcs
+inherit perl-module toolchain-funcs
 
 DESCRIPTION="Scaffolding Polymorphic Genomes and Metagenomes, a part of AMOS bundle"
 HOMEPAGE="
-	http://sourceforge.net/apps/mediawiki/amos/index.php?title=AMOS
-	http://sourceforge.net/projects/amos/files/bambus
-	http://www.tigr.org/software/bambus"
+	https://sourceforge.net/apps/mediawiki/amos/index.php?title=AMOS
+	https://sourceforge.net/projects/amos/files/bambus"
 SRC_URI="
-	http://sourceforge.net/projects/amos/files/bambus/${PV}/${P}.tar.gz
-	http://mira-assembler.sourceforge.net/docs/scaffolding_MIRA_BAMBUS.pdf"
+	https://sourceforge.net/projects/amos/files/bambus/${PV}/${P}.tar.gz
+	http://mira-assembler.sourceforge.net/docs/scaffolding_MIRA_BAMBUS.pdf" # no https
 
 LICENSE="Artistic"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
 
 RDEPEND="
 	sci-biology/tigr-foundation-libs
-	dev-lang/perl
 	dev-perl/XML-Parser
 	dev-perl/Config-IniFiles
 	dev-perl/GraphViz"
 DEPEND="${RDEPEND}"
 
+PATCHES=(
+	"${FILESDIR}"/TigrFoundation-all-patches.patch
+)
+
 src_prepare() {
-#	epatch "${FILESDIR}"/amos-2.0.8-gcc44.patch
+	default
+#	eapply "${FILESDIR}"/amos-2.0.8-gcc44.patch
 	sed -e 's:BASEDIR = /usr/local/packages/bambus:BASEDIR = /usr:' -i Makefile || die
 	sed -e 's:PERL = /usr/local/bin/perl:PERL = /usr/bin/perl:' -i Makefile || die
 	sed \
@@ -67,12 +67,11 @@ src_prepare() {
 	#rm -rf src/TIGR_Foundation_CC || die "Failed to rm -rf src/TIGR_Foundation_CC/, we use it from sci-biology/tigr-foundation-libs"
 	#sed -i 's:TIGR_Foundation_CC::' src/Makefile || die "Failed to zap last pointer to local copy of tigr-foundation-libs"
 	cd src/TIGR_Foundation_CC || die "Failed to cd src/TIGR_Foundation_CC/"
-	epatch "${FILESDIR}"/TigrFoundation-all-patches.patch || die
-	sed -e "s:/export/usr/local:${D}/usr:g" -i Makefile || die
+	sed -e "s:/export/usr/local:${ED}/usr:g" -i Makefile || die
 }
 
 src_compile() {
-	emake DESTDIR="${D}/usr"
+	emake DESTDIR="${ED}/usr"
 
 	# TODO:
 	#ld  -L../TIGR_Foundation_CC/ -shared -fPIC -o grommit grommit.o -L. -lgraph -lTigrFoundation
@@ -89,10 +88,10 @@ src_compile() {
 }
 
 src_install() {
-	emake DESTDIR="${D}/usr" install
+	emake DESTDIR="${ED}/usr" install
 	# cvs HEAD of amos now contains even more updated files: /usr/bin/printScaff /usr/bin/untangle /usr/lib/TIGR/AsmLib.pm
-	for f in FASTArecord.pm FASTAreader.pm Foundation.pm FASTAgrammar.pm AsmLib.pm; do rm "${D}"/usr/lib/TIGR/$f; done || die
-	for f in printScaff untangle; do rm "${D}"/usr/bin/$f; done || die
+	for f in FASTArecord.pm FASTAreader.pm Foundation.pm FASTAgrammar.pm AsmLib.pm; do rm "${ED}"/usr/lib/TIGR/$f; done || die
+	for f in printScaff untangle; do rm "${ED}"/usr/bin/$f; done || die
 
 	# we compiled using locally provided TIGR_Foundation_CC/{cc,.hh} files but
 	# link against the libTigrFoundation.a provided by sci-biology/tigr-foundation-libs package

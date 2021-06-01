@@ -1,20 +1,16 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
+inherit eutils flag-o-matic multilib toolchain-funcs
 
-inherit eutils flag-o-matic multilib python-single-r1 toolchain-funcs
-
-MY_PV="2.2.30"
 MY_P="ncbi-blast-${PV}+-src"
 # workdir/ncbi-blast-2.2.30+-src
 # ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.30/ncbi-blast-2.2.30+-src.tar.gz
 
 DESCRIPTION="A subset of NCBI C++ Toolkit containing just the NCBI BLAST+"
-HOMEPAGE="http://www.ncbi.nlm.nih.gov/books/bv.fcgi?rid=toolkit"
+HOMEPAGE="https://ncbi.github.io/cxx-toolkit/"
 SRC_URI="
 	ftp://ftp.ncbi.nih.gov/blast/executables/blast+/${PV}/${MY_P}.tar.gz"
 #	http://dev.gentoo.org/~jlec/distfiles/${PN}-${PV#0.}-asneeded.patch.xz"
@@ -26,16 +22,15 @@ SLOT="0"
 IUSE="
 	debug static-libs static threads pch
 	test wxwidgets odbc
-	berkdb boost bzip2 cppunit curl expat fastcgi fltk freetype gif
-	glut gnutls hdf5 icu jpeg lzo mesa mysql muparser opengl pcre png python
+	berkdb boost bzip2 cppunit curl expat fltk freetype gif
+	glut gnutls hdf5 icu jpeg lzo mesa mysql muparser opengl pcre png
 	sablotron sqlite tiff xerces xalan xml xpm xslt X"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
-#KEYWORDS=""
-
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+KEYWORDS="~amd64 ~x86"
+RESTRICT="!test? ( test )"
 
 # sys-libs/db should be compiled with USE=cxx
 DEPEND="
+	<sys-devel/gcc-10:=
 	!sci-biology/ncbi-tools++
 	!sci-biology/sra_sdk
 	berkdb? ( sys-libs/db:4.3[cxx] )
@@ -44,13 +39,11 @@ DEPEND="
 	sqlite? ( dev-db/sqlite:3 )
 	mysql? ( virtual/mysql )
 	fltk? ( x11-libs/fltk )
-	opengl? ( virtual/opengl media-libs/glew )
+	opengl? ( virtual/opengl media-libs/glew:0= )
 	mesa? ( media-libs/mesa[osmesa] )
 	glut? ( media-libs/freeglut )
 	freetype? ( media-libs/freetype )
-	fastcgi? ( www-apache/mod_fastcgi )
 	gnutls? ( net-libs/gnutls )
-	python? ( ${PYTHON_DEPS} )
 	cppunit? ( dev-util/cppunit )
 	icu? ( dev-libs/icu )
 	expat? ( dev-libs/expat )
@@ -136,6 +129,7 @@ src_prepare() {
 	# Temporarily disabling eautoconf because we patch configure via ${P}-support-autoconf-2.60.patch
 	# eautoconf # keep it disabled until we can ensure 2.59 is installed
 	# beware 12.0.0. and previous required autoconf-2.59, a patch for 12.0.0 brings autoconf-2.60 support
+	default
 }
 
 # possibly place modified contents of ${W}/src/build-system/config.site.ncbi and {W}/src/build-system/config.site.ex into ${W}/src/build-system/config.site
@@ -241,10 +235,10 @@ src_configure() {
 	$(use_with wxwidgets wxwidgets "${EPREFIX}/usr")
 	$(use_with wxwidgets wxwidgets-ucs)
 	$(use_with freetype freetype "${EPREFIX}/usr")
-	$(use_with fastcgi fastcgi "${EPREFIX}/usr")
 #	$(use_with berkdb bdb "${EPREFIX}/usr") # not in ncbi-blast+
 	$(usex odbc --with-odbc="${EPREFIX}/usr" "")
-	$(use_with python python "${EPREFIX}/usr")
+	# is python2
+	--without-python
 	$(use_with boost boost "${EPREFIX}/usr")
 	$(use_with sqlite sqlite3 "${EPREFIX}/usr")
 	$(use_with icu icu "${EPREFIX}/usr")
@@ -282,7 +276,7 @@ src_configure() {
 		--prefix="${EPREFIX}/usr" \
 		--libdir=/usr/lib64 \
 		--with-flat-makefile \
-		${myconf[@]} || die
+		${myconf[@]} || die "gcc 7 or newer were not used by upstream hence unsupported"
 #--without-debug \
 #		--with-bin-release \
 #		--with-bincopy \
@@ -313,17 +307,17 @@ src_compile() {
 	# only in --with-flat-makefile configurations.  For now (12.0.0), you'll need to
 	# add or extend more DLL_LIB settings, to which end you may find the
 	# resources at http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/
-	# helpful.  For instance, 
-	# 
+	# helpful.  For instance,
+	#
 	# http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dbapi_driver.html
-	# 
+	#
 	# indicates that src/dbapi/driver/Makefile.dbapi_driver.lib should set
-	# 
+	#
 	# DLL_LIB = xncbi
-	# 
+	#
 	# (You can find the path to that makefile by examining
 	# .../status/.dbapi_driver.dep or .../build/Makefile.flat.)
-	# 
+	#
 	# To take full advantage of --with-flat-makefile, you'll need the following (instead of 'emake all_p -C "${S}"_build/build') and call configure --with-flat-makefile:
 	emake -C "${S}"_build/build -f Makefile.flat
 }

@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 MY_P="${PN}.${PV}"
 
@@ -14,16 +13,16 @@ SRC_URI="http://kinemage.biochem.duke.edu/downloads/software/mage/${MY_P}.src.tg
 
 LICENSE="richardson"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="~amd64 ~x86"
 
 RDEPEND="sci-chemistry/prekin"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/${MY_P}"
 
-src_prepare() {
-	epatch "${FILESDIR}"/${PV}-Makefile.patch
-}
+PATCHES=(
+	"${FILESDIR}/${PV}-Makefile.patch"
+)
 
 src_compile() {
 	emake \

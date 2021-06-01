@@ -1,15 +1,13 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-PERL_EXPORT_PHASE_FUNCTIONS=no
-inherit perl-module eutils toolchain-funcs
+inherit perl-module toolchain-funcs
 
 DESCRIPTION="Merge various gene prediction into one (unsupervised learning system)"
-HOMEPAGE="http://sourceforge.net/projects/glean-gene"
-SRC_URI="http://downloads.sourceforge.net/project/glean-gene/GLEAN/glean-1-0-1/glean-1-0-1.tar.gz"
+HOMEPAGE="https://sourceforge.net/projects/glean-gene"
+SRC_URI="https://downloads.sourceforge.net/project/glean-gene/GLEAN/glean-${PV//./-}/glean-${PV//./-}.tar.gz"
 
 LICENSE="Artistic"
 SLOT="0"
@@ -18,13 +16,12 @@ IUSE="graphviz"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	dev-perl/yaml
 	virtual/perl-Storable
 	virtual/perl-Getopt-Long
 	virtual/perl-Data-Dumper
 	dev-perl/Module-Pluggable
 	dev-perl/Algorithm-Diff
-	dev-perl/yaml
+	dev-perl/YAML
 	sci-biology/bioperl
 	graphviz? ( dev-perl/GraphViz )"
 # FindBin
@@ -35,6 +32,5 @@ src_install(){
 	dobin bin/*
 	dodoc README
 	perl_set_version
-	insinto ${VENDOR_LIB}
-	doins -r lib/Glean
+	perl_domodule -r lib/Glean
 }

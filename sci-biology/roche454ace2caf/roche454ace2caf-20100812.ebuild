@@ -1,17 +1,15 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-DESCRIPTION="Convert from ace to gap4 (of staden v1.x), not needed to convert ace for gap5 of staden v2"
-HOMEPAGE="http://genome.imb-jena.de/software/roche454ace2caf"
-SRC_URI="http://genome.imb-jena.de/software/roche454ace2caf/download/src/roche454ace2gap-2010-12-08.tgz"
+DESCRIPTION="ace to gap4 converter"
+HOMEPAGE="https://genome.imb-jena.de/software/roche454ace2caf/"
+SRC_URI="https://genome.imb-jena.de/software/roche454ace2caf/download/src/roche454ace2gap-2010-12-08.tgz"
 
 LICENSE="FLI-Jena"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS="~amd64"
 
 DEPEND=""
 RDEPEND="${DEPEND}
@@ -22,9 +20,9 @@ RDEPEND="${DEPEND}
 	dev-lang/perl
 	app-shells/ksh"
 
-S="${WORKDIR}"/roche2gap
+S="${WORKDIR}/roche2gap"
 
 src_install(){
 	dobin bin/*.pl bin/roche454ace2gap
-	dosym bin/roche454ace2gap roche2gap # claims to require ksh, have not tested bash
+	einstalldocs
 }

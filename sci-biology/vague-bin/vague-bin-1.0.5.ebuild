@@ -1,21 +1,18 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 inherit java-pkg-2
 
-[ "$PV" == "9999" ] && inherit git-r3
-
 DESCRIPTION="GUI for Velvet de novo assembler"
-HOMEPAGE="http://www.vicbioinformatics.com/software.vague.shtml"
+HOMEPAGE="https://vicbioinformatics.com/software.vague.shtml"
 
 if [ "$PV" == "9999" ]; then
+	inherit git-r3
 	EGIT_REPO_URI="https://github.com/Victorian-Bioinformatics-Consortium/vague"
-	KEYWORDS=""
 else
-	SRC_URI="http://www.vicbioinformatics.com/vague-${PV}.tar.gz"
+	SRC_URI="https://vicbioinformatics.com/vague-${PV}.tar.gz"
 	KEYWORDS="~amd64"
 fi
 
@@ -24,14 +21,18 @@ SLOT="0"
 
 RDEPEND="
 	>=virtual/jre-1.5:*
-	sci-biology/velvet
-	sci-biology/velvetk"
+	sci-biology/velvet"
 DEPEND=">=virtual/jdk-1.5:*"
 
 S="${WORKDIR}"/vague-${PV}
 
+PATCHES=(
+	"${FILESDIR}"/vague.patch
+)
+
 src_prepare(){
-	epatch "${FILESDIR}"/vague.patch
+	default
+	sed -e "s#-jar /usr/share#-jar ${EPREFIX}/usr/share#" -i vague || die
 }
 
 src_install(){

@@ -5,7 +5,11 @@
 		<email>mmokrejs@fold.natur.cuni.cz</email>
 		<name>Martin Mokrejs</name>
 	</maintainer>
-<maintainer type="project">
+	<maintainer type="person">
+		<email>anton.stay.connected@gmail.com</email>
+		<name>Anton Molyboha</name>
+	</maintainer>
+	<maintainer type="project">
 		<email>sci-biology@gentoo.org</email>
 		<name>Gentoo Biology Project</name>
 	</maintainer>

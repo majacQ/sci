@@ -1,12 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
-inherit eutils
-
-DESCRIPTION="The purpose of this library is to simplify the creation of computer graphics software"
+DESCRIPTION="Simplify the creation of computer graphics software"
 HOMEPAGE="http://mgarland.org/software/libgfx.html"
 SRC_URI="http://mgarland.org/dist/${P}.tar.gz"
 
@@ -15,9 +12,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="static-libs"
 
-src_prepare() {
-	epatch "${FILESDIR}"/${PV}-gcc4.3.patch
-}
+PATCHES=( "${FILESDIR}"/${PV}-gcc4.3.patch )
 
 src_compile() {
 	cd src || die
@@ -28,5 +23,5 @@ src_install() {
 	use static-libs && dolib.a src/*.a
 	doheader include/gfx/gfx.h
 
-	dohtml doc/*
+	dodoc doc/*
 }

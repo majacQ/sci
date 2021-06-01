@@ -1,18 +1,16 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="Visualisation and analysis of processed NMR data"
-HOMEPAGE="http://www.onemoonscientific.com/nmrview/"
+HOMEPAGE="https://nmrfx.org/nmrfx/nmrviewj"
 SRC_URI="
 	${PN}${PV}.lib.tar.gz
 	${PN}${PV//./_}_01_linux.gz"
 
 SLOT="0"
 LICENSE="all-rights-reserved"
-IUSE=""
 KEYWORDS="-* ~amd64 ~x86 ~amd64-linux ~x86-linux"
 
 RDEPEND="x11-libs/libX11"
@@ -33,8 +31,7 @@ pkg_nofetch() {
 	einfo "Complete the registration process, then download the following files:"
 	einfo "\t${A}"
 	echo
-	einfo "Place the downloaded files in your distfiles directory:"
-	einfo "\t${DISTDIR}"
+	einfo "Place the downloaded files in your distfiles directory"
 	echo
 }
 
