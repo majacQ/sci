@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -11,7 +11,7 @@ HOMEPAGE="http://www.broadinstitute.org/annotation/argo2
 	http://www.broadinstitute.org/annotation/argo"
 SRC_URI="http://www.broadinstitute.org/annotation/argo/src/workspace-2008-03-11.tgz"
 #
-# cat workspace-2008-03-11/annotation/argo/version.txt 
+# cat workspace-2008-03-11/annotation/argo/version.txt
 # Gebo-1.0.17-build-1313
 
 LICENSE="LGPL-3"

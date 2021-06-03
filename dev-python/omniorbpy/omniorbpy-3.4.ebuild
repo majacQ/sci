@@ -1,12 +1,12 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools-utils eutils multilib python-r1
+inherit autotools python-r1
 
 MY_P=${P/omniorb/omniORB}
 
@@ -16,7 +16,7 @@ SRC_URI="mirror://sourceforge/omniorb/${MY_P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~sparc ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="ssl"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -40,23 +40,23 @@ src_prepare() {
 		"${S}"/python/omniORB/dir.mk \
 		"${S}"/python/COS/dir.mk \
 		"${S}"/python/CosNaming/dir.mk || die
-	autotools-utils_src_prepare
+	default
 }
 
 src_configure() {
 	local myeconfargs=( --with-omniorb="${EPREFIX}/usr" )
 
-	use ssl && myconf+=( --with-openssl="${EPREFIX}/usr" )
+	use ssl && myeconfargs+=( --with-openssl="${EPREFIX}/usr" )
 
-	python_foreach_impl autotools-utils_src_configure
+	python_foreach_impl econf ${myeconfargs[@]}
 }
 
 src_compile() {
-	python_foreach_impl autotools-utils_src_compile
+	python_foreach_impl default
 }
 
 src_install() {
-	python_foreach_impl autotools-utils_src_install
+	python_foreach_impl default
 
 	HTML_DOCS=( doc/omniORBpy )
 	DOCS=( doc/omniORBpy.p* doc/tex/* )

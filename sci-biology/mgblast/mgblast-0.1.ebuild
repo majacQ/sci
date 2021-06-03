@@ -1,10 +1,10 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-DESCRIPTION="Customized version of megablast from TIGR Gene Indices project used by tgicl and gicl utilities"
+DESCRIPTION="Customized version of megablast from TIGR Gene Indices project"
 HOMEPAGE="http://compbio.dfci.harvard.edu/tgi/software/"
 SRC_URI="ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/tgicl/mgblast.tar.gz"
 

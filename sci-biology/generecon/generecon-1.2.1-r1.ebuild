@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit autotools eutils
 
-DESCRIPTION="Disequilibrium gene mapping based on coalescent theory using Bayesian Markov Chain MC methods"
+DESCRIPTION="Disequilibrium gene mapping based on coalescent theory using Bayesian MC methods"
 HOMEPAGE="http://www.daimi.au.dk/~mailund/GeneRecon/"
 SRC_URI="http://www.daimi.au.dk/~mailund/GeneRecon/download/${P}.tar.gz"
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -10,7 +10,7 @@ inherit python-single-r1
 
 MY_P="${PN}${PV}"
 
-DESCRIPTION="Program for processing of non-uniformly sampled (NUS) multidimensional NMR spectra"
+DESCRIPTION="Program for processing of NUS multidimensional NMR spectra"
 HOMEPAGE="http://www.nmr.gu.se/~mdd/"
 SRC_URI="http://pc8.nmr.gu.se/~mdd/Downloads/${MY_P}.tgz"
 

@@ -1,6 +1,6 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -18,10 +18,15 @@ IUSE=""
 DEPEND="
 	>=dev-lang/perl-5.6.1
 	dev-perl/Module-Build
+	dev-perl/Config-Std
+	virtual/perl-Data-Dumper
+	dev-perl/Data-Types
+	dev-perl/DBD-SQLite
 	dev-perl/DBIx-Class
 	dev-perl/IO-All
 	dev-perl/Number-Format
-	dev-perl/Set-IntSpan
+	virtual/perl-Scalar-List-Utils
+	dev-perl/Set-IntSpan-Fast
 	dev-perl/Statistics-Descriptive-Discrete
 	dev-perl/Template-Toolkit
 	dev-perl/Text-Graph
@@ -29,7 +34,6 @@ DEPEND="
 	dev-perl/Text-Table
 	dev-perl/Exception-Class
 	dev-perl/Test-Warn
-	dev-perl/DBIx-Class
 	dev-perl/URI"
 RDEPEND="${DEPEND}"
 

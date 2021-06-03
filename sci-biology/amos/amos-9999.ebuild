@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PERL_EXPORT_PHASE_FUNCTIONS=no
 inherit perl-module eutils toolchain-funcs
@@ -10,7 +10,7 @@ inherit perl-module eutils toolchain-funcs
 AUTOTOOLS_AUTORECONF=true
 inherit autotools-utils git-r3
 
-DESCRIPTION="Genome assembly package live cvs sources"
+DESCRIPTION="Whole genome assembler, Hawkeye and AMOScmp to compare multiple assemblies"
 HOMEPAGE="http://sourceforge.net/projects/amos"
 SRC_URI=""
 EGIT_REPO_URI="git://amos.git.sourceforge.net/gitroot/amos/amos"
@@ -34,6 +34,10 @@ RDEPEND="${DEPEND}
 
 #  --with-jellyfish        location of Jellyfish headers
 
+# $ gap-links
+# ERROR:  Could not open file  LIBGUESTFS_PATH=/usr/share/guestfs/appliance/
+# $
+
 src_install() {
 	default
 	python_replicate_script "${ED}"/usr/bin/goBambus2
@@ -45,8 +49,14 @@ src_install() {
 	insinto ${VENDOR_LIB}/TIGR
 	doins "${D}"/usr/lib64/TIGR/*.pm
 	# move also /usr/lib64/AMOS/AMOS.py to /usr/bin
-	mv "${D}"/usr/lib64/AMOS/*.py "${D}"/usr/bin || die
+	mv "${ED}"/usr/lib64/AMOS/*.py "${ED}"/usr/bin || die
 	# zap the mis-placed files ('make install' is at fault)
-	rm -f "${D}"/usr/lib64/AMOS/*.pm
-	rm -rf "${D}"/usr/lib64/TIGR
+	rm -f "${ED}"/usr/lib64/AMOS/*.pm
+	rm -rf "${ED}"/usr/lib64/TIGR
+
+	mkdir -p "${ED}"/etc || die
+	touch "${ED}"/etc/amos.acf || die
+
+	echo AMOSCONF="${EPREFIX}"/etc/amos.acf > "${T}"/99amos || die
+	doenvd "${T}/99amos"
 }

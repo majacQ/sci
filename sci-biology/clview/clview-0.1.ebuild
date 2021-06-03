@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -58,7 +58,7 @@ SRC_URI="
 # -rw-r--r-- 1 mmokrejs mmokrejs  6941 Nov  7  2005 gcdb.h
 # -rw-r--r-- 1 mmokrejs mmokrejs  8998 Nov  7  2005 gcompress.cpp
 # -rw-r--r-- 1 mmokrejs mmokrejs  3670 Nov  7  2005 gcompress.h
-# 
+#
 
 LICENSE="Artistic"
 SLOT="0"

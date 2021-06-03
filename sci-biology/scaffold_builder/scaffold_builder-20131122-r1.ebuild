@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit python-r1
 
-DESCRIPTION="Combine FASTA contigs from a de novo assembly into scaffolds using a reference assembly"
+DESCRIPTION="Combine FASTA contigs from a de novo assembly into scaffolds"
 HOMEPAGE="
 	http://sourceforge.net/projects/scaffold-b
 	http://edwards.sdsu.edu/scaffold_builder"

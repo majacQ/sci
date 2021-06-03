@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils toolchain-funcs
 
-DESCRIPTION="Intended to facilitate the transition from refmac5 refinement to shelxh or shelxl refinement"
+DESCRIPTION="Facilitate the transition from refmac5 refinement to shelxh or shelxl refinement"
 HOMEPAGE="http://shelx.uni-ac.gwdg.de/~tg/research/programs/conv/mtz2x/mtz2hkl/"
 SRC_URI="http://shelx.uni-ac.gwdg.de/~tg/research/programs/conv/mtz2x/${PN}/downloads/${PV}/${PN}_v${PV}.tar.gz"
 

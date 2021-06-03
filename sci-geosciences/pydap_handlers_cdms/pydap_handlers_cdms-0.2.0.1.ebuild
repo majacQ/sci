@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -11,7 +11,7 @@ inherit distutils-r1
 MY_PN=${PN//_/.}
 MY_P=${P//_/.}
 
-DESCRIPTION="CDMS handler for Pydap server that supports netCDF, HDF, GrADS/GRIB, or PCMDI DRS"
+DESCRIPTION="CDMS handler for Pydap server"
 HOMEPAGE="http://pydap.org/handlers.html#cdms"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -26,5 +26,7 @@ src_prepare(){
 }
 
 src_install(){
-	emake install DESTDIR="${D}/usr"
+	emake install DESTDIR="${D}/${EPREFIX}"/usr # Makefile does not respect DESTDIR
+	mkdir -p "${D}/${EPREFIX}" || die
+	mv "${D}"/usr "${D}/${EPREFIX}"/ || die
 }

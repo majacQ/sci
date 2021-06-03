@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils multilib
 
@@ -11,7 +11,7 @@ GTEST_PV="1.7.0"
 DESCRIPTION="A general purpose GPU library"
 HOMEPAGE="http://www.arrayfire.com/"
 SRC_URI="http://arrayfire.com/arrayfire_source/${PN}-full-${PV}.tar.bz2 -> ${P}.tar.bz2
-test? ( https://googletest.googlecode.com/files/gtest-${GTEST_PV}.zip )"
+test? ( https://github.com/google/googletest/archive/release-${GTEST_PV}.zip -> gtest-${GTEST_PV}.zip )"
 KEYWORDS="~amd64"
 
 LICENSE="BSD
@@ -36,13 +36,13 @@ RDEPEND="
 		virtual/blas
 		virtual/cblas
 		virtual/lapacke
-		dev-libs/boost
-		dev-libs/boost-compute
 		>=sci-libs/clblas-2.4
 		>=sci-libs/clfft-2.6.1
+		dev-libs/boost
+		|| ( dev-libs/boost-compute >=dev-libs/boost-1.61.0 )
 	)
 	graphics? (
-		media-libs/glew
+		media-libs/glew:=
 		>=media-libs/glfw-3.1.1
 		=sci-visualization/forge-3.2.2
 	)"
@@ -85,19 +85,19 @@ src_configure() {
 	fi
 
 	local mycmakeargs=(
-	   $(cmake-utils_use_build cpu CPU)
-	   $(cmake-utils_use_build cuda CUDA)
-	   $(cmake-utils_use_build opencl OPENCL)
-	   $(cmake-utils_use_build examples EXAMPLES)
-	   $(cmake-utils_use_build test TEST)
-	   $(cmake-utils_use_build graphics GRAPHICS)
-	   $(cmake-utils_use_build nonfree NONFREE)
-	   $(cmake-utils_use_build unified UNIFIED)
-	   -DUSE_SYSTEM_BOOST_COMPUTE=ON
-	   -DUSE_SYSTEM_CLBLAS=ON
-	   -DUSE_SYSTEM_CLFFT=ON
-	   -DUSE_SYSTEM_FORGE=ON
-	   -DAF_INSTALL_CMAKE_DIR=/usr/$(get_libdir)/cmake/ArrayFire
+		-DBUILD_CPU="$(usex cpu)"
+		-DBUILD_CUDA="$(usex cuda)"
+		-DBUILD_OPENCL="$(usex opencl)"
+		-DBUILD_EXAMPLES="$(usex examples)"
+		-DBUILD_TEST="$(usex test)"
+		-DBUILD_GRAPHICS="$(usex graphics)"
+		-DBUILD_NONFREE="$(usex nonfree)"
+		-DBUILD_UNIFIED="$(usex unified)"
+		-DUSE_SYSTEM_BOOST_COMPUTE=ON
+		-DUSE_SYSTEM_CLBLAS=ON
+		-DUSE_SYSTEM_CLFFT=ON
+		-DUSE_SYSTEM_FORGE=ON
+		-DAF_INSTALL_CMAKE_DIR=/usr/$(get_libdir)/cmake/ArrayFire
 	)
 	cmake-utils_src_configure
 }

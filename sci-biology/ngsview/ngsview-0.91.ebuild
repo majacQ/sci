@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit qt4-r2
 
-DESCRIPTION="Display, edit next-gen sequence alignment (BED, BLAST, Eland, mapview processed MAQ, Corona formats)"
+DESCRIPTION="Display, edit NGS alignments"
 HOMEPAGE="http://sourceforge.net/projects/ngsview"
 SRC_URI="mirror://sourceforge/projects/${PN}/files/${PN}/${P}.tar.gz"
 

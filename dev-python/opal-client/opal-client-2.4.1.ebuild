@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}"
 S="${WORKDIR}"/${MY_P}
 
 src_install() {
-	"${EPREFIX}"/usr/bin/wsdl2py  wsdl/opal.wsdl || die
+	"${EPREFIX}"/usr/bin/wsdl2py wsdl/opal.wsdl || die
 
 	python_moduleinto AppService
 	python_foreach_impl python_domodule AppService_*.py

@@ -1,8 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=5
 
 DESCRIPTION="Library for reasoning about floating point numbers in coq"
 HOMEPAGE="http://lipforge.ens-lyon.fr/www/pff/"

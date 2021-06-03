@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -35,7 +35,8 @@ src_prepare() {
 	sed \
 		-e 's: -O3 -finline-functions::g' \
 		-i configure.in || die
-	mc configure.in configure.ac
+	# we patch the configure.in file like sci-biology/exonerate:gentoo does, though it is ugly hack
+	# mv configure.in configure.ac
 	autotools-utils_src_prepare
 }
 

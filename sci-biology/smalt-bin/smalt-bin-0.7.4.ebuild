@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -7,7 +7,7 @@ EAPI=5
 MY_PN="${PN%-bin}"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="Pairwise sequence alignment mapping DNA reads onto genomic reference, better over SSAHA2"
+DESCRIPTION="Pairwise sequence alignment mapping DNA reads onto genomic reference"
 HOMEPAGE="http://www.sanger.ac.uk/resources/software/smalt/"
 SRC_URI="ftp://ftp.sanger.ac.uk/pub4/resources/software/${MY_PN}/${MY_P}.tgz"
 

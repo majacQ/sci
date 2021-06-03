@@ -1,6 +1,6 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -15,7 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE=""
 
-DEPEND=""
+# The smoothing function sav_gol.c cannot be re-distributed but can be downloaded from TISEAN.
+# http://www.mpipks-dresden.mpg.de/~tisean/
+
+DEPEND="sci-mathematics/tisean"
 RDEPEND="${DEPEND}
 	sci-biology/biopython"
 

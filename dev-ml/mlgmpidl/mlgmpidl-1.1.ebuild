@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 DESCRIPTION="OCaml interface to the GMP and MPFR libraries"
 HOMEPAGE="http://www.inrialpes.fr/pop-art/people/bjeannet/mlxxxidl-forge/mlgmpidl/"
@@ -24,9 +24,11 @@ DEPEND="${RDEPEND}
 	doc? (
 		app-text/texlive
 		app-text/ghostscript-gpl
-		)"
+	)"
 
 S="${WORKDIR}/${PN}"
+
+PATCHES=( "${FILESDIR}"/${P}-mpfr-3_compat.patch )
 
 src_prepare() {
 	rm -R html mlgmpidl.pdf || die
@@ -41,7 +43,7 @@ src_prepare() {
 		sed -i -e "s/HAS_MPFR=1/#HAS_MPFR=0/g" Makefile.config || die
 	fi
 
-	epatch "${FILESDIR}"/${P}-mpfr-3_compat.patch
+	default
 }
 
 src_compile() {

@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=5
 
 inherit java-pkg-opt-2
 
-DESCRIPTION="Prediction of Protein Backbone and Sidechain Torsion Angles from NMR Chemical Shifts"
+DESCRIPTION="Prediction of Protein bb and sc Torsion Angles from NMR Chemical Shifts"
 HOMEPAGE="http://spin.niddk.nih.gov/bax/software/TALOS-N/"
 SRC_URI="http://spin.niddk.nih.gov/bax/software/TALOS-N/talosn.tZ -> ${P}.tgz"
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -46,11 +46,10 @@ DEPEND="
 	sqlite? ( dev-db/sqlite:3 )
 	mysql? ( virtual/mysql )
 	fltk? ( x11-libs/fltk )
-	opengl? ( virtual/opengl media-libs/glew )
+	opengl? ( virtual/opengl media-libs/glew:0= )
 	mesa? ( media-libs/mesa[osmesa] )
 	glut? ( media-libs/freeglut )
 	freetype? ( media-libs/freetype )
-	fastcgi? ( www-apache/mod_fastcgi )
 	gnutls? ( net-libs/gnutls )
 	python? ( ${PYTHON_DEPS} )
 	cppunit? ( dev-util/cppunit )
@@ -121,6 +120,7 @@ src_prepare() {
 		"${FILESDIR}"/${P}-drop-STATIC-from-LIB.patch
 		"${FILESDIR}"/${P}-fix-install.patch
 		"${FILESDIR}"/${P}-bdb6.patch
+		"${FILESDIR}"/${P}-never_build_test_boost.patch # bug #579248
 		)
 #       "${FILESDIR}"/${P}-as-needed.patch
 #       "${FILESDIR}"/${P}-fix-creaders-linking.patch
@@ -316,19 +316,22 @@ src_compile() {
 	# only in --with-flat-makefile configurations.  For now (12.0.0), you'll need to
 	# add or extend more DLL_LIB settings, to which end you may find the
 	# resources at http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/
-	# helpful.  For instance, 
-	# 
+	# helpful.  For instance,
+	#
 	# http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dbapi_driver.html
-	# 
+	#
 	# indicates that src/dbapi/driver/Makefile.dbapi_driver.lib should set
-	# 
+	#
 	# DLL_LIB = xncbi
-	# 
+	#
 	# (You can find the path to that makefile by examining
 	# .../status/.dbapi_driver.dep or .../build/Makefile.flat.)
-	# 
+	#
 	# To take full advantage of --with-flat-makefile, you'll need the following (instead of 'emake all_p -C "${S}"_build/build') and call configure --with-flat-makefile:
 	emake -C "${S}"_build/build -f Makefile.flat
+	#
+	# >=gcc-5.3.0 is not supported, see also bug #579248#c8
+	# configure: error: Do not know how to build MT-safe with compiler /usr/bin/x86_64-pc-linux-gnu-g++  5.3.0
 }
 
 src_install() {

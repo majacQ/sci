@@ -1,12 +1,12 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit fortran-2 multilib toolchain-funcs
+inherit fortran-2 toolchain-funcs
 
-DESCRIPTION="a compiler cache for fortran"
+DESCRIPTION="Compiler cache for fortran"
 HOMEPAGE="http://people.irisa.fr/Edouard.Canot/f90cache/"
 SRC_URI="http://people.irisa.fr/Edouard.Canot/${PN}/${P}.tar.bz2"
 

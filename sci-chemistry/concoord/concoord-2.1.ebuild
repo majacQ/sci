@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-DESCRIPTION="Method to generate protein conformations around a known structure based on geometric restrictions"
+DESCRIPTION="Protein conformations around a known structure based on geometric restrictions"
 HOMEPAGE="http://www.mpibpc.mpg.de/groups/de_groot/concoord/concoord.html"
 SRC_URI="
 	amd64? ( http://www.mpibpc.mpg.de/groups/de_groot/concoord/concoord2.1_linux_x86_64.tgz )

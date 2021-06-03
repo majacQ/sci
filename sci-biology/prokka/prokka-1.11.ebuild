@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -19,7 +19,7 @@ RDEPEND="${DEPEND}
 	sys-process/parallel
 	sci-biology/bioperl
 	sci-biology/prodigal
-	sci-biology/ncbi-tools++ || ( sci-biology/ncbi-blast+ )
+	|| ( sci-biology/ncbi-tools++ sci-biology/ncbi-blast+ )
 	sci-biology/hmmer
 	sci-biology/infernal
 	sci-biology/exonerate

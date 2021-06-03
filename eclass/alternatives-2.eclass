@@ -24,14 +24,14 @@ case "${EAPI:-0}" in
 	0|1|2|3|4)
 		die "Unsupported EAPI=${EAPI:-0} (too old) for ${ECLASS}"
 		;;
-	5)
+	5|6)
 		;;
 	*)
 		die "Unsupported EAPI=${EAPI} (unknown) for ${ECLASS}"
 		;;
 esac
 
-DEPEND=">=app-admin/eselect-1.4.5-r103"
+DEPEND=">=app-admin/eselect-1.4.8-r100"
 RDEPEND="${DEPEND}
 	!app-eselect/eselect-blas
 	!app-eselect/eselect-cblas

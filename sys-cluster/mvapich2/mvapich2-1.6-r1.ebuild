@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=5
 
 inherit flag-o-matic fortran-2 mpi
 
@@ -16,10 +16,10 @@ KEYWORDS="~x86 ~amd64"
 IUSE="debug fortran large-cluster medium-cluster romio threads"
 
 RDEPEND="
-	sys-infiniband/libibverbs:=
-	sys-infiniband/libibumad:=
-	sys-infiniband/libibmad:=
-	sys-infiniband/librdmacm:=
+	sys-fabric/libibverbs:=
+	sys-fabric/libibumad:=
+	sys-fabric/libibmad:=
+	sys-fabric/librdmacm:=
 	"
 DEPEND="${RDEPEND}"
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -22,8 +22,8 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}
 	sci-biology/parafly
-	=sci-biology/jellyfish-2.1.4
-	sci-biology/samtools
+	>=sci-biology/jellyfish-2.1.4
+	sci-biology/samtools:0.1-legacy
 	>=sci-biology/GAL-0.2.1
 	dev-perl/IO-All"
 # ReleaseNotes mentions that <sci-biology/samtools-1.1 is needed
@@ -38,13 +38,13 @@ RDEPEND="${DEPEND}
 
 src_install(){
 	perl_set_version
-	dobin Trinity util/*.pl trinity-plugins/GAL_0.2.1/fasta_tool
+	dobin Trinity util/*.pl
 	# should become a new package depending on dev-perl/IO-All
 	dobin trinity-plugins/fstrozzi-Fastool-7c3e034f05/fastool
 	dodoc trinity-plugins/fstrozzi-Fastool-7c3e034f05/README.md
 	#
 	insinto /usr/share/"${PN}"/util
-	rm -f trinity-plugins/GAL_0.2.1 util/fasta_tool
+	rm -rf trinity-plugins/GAL_0.2.1 util/fasta_tool
 	doins -r util/*
 	#
 	dobin Inchworm/bin/*
