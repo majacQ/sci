@@ -1,3 +1,4 @@
+  <<<<<<< random
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
@@ -6,6 +7,17 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 
 inherit fortran-2 python-r1 toolchain-funcs
+  =======
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+EAPI=5
+
+PYTHON_COMPAT=( python2_7 )
+
+inherit eutils fortran-2 multilib python-r1 toolchain-funcs
+  >>>>>>> ambertools
 
 DESCRIPTION="A suite for carrying out complete molecular mechanics investigations"
 HOMEPAGE="http://ambermd.org/#AmberTools"
@@ -48,12 +60,20 @@ pkg_setup() {
 }
 
 src_prepare() {
+  <<<<<<< random
 	eapply \
 		"${FILESDIR}"/${PN}-15-gentoo.patch
 	eapply -p0 \
 		"${FILESDIR}"/${PN}-15-update.{1..6}.patch
 
 	eapply_user
+  =======
+	epatch \
+		"${FILESDIR}"/${PN}-15-gentoo.patch \
+		"${FILESDIR}"/${PN}-15-update.{1..6}.patch
+
+	epatch_user
+  >>>>>>> ambertools
 
 	cd "${S}"/AmberTools/src || die
 	rm -r \
@@ -116,20 +136,33 @@ src_configure() {
 		gnu || die
 }
 
+  <<<<<<< random
 src_compile() {
 	emake \
 		CC=$(tc-getCC) \
 		FC=$(tc-getFC)
 }
 
+  =======
+  >>>>>>> ambertools
 src_test() {
 	source ${AMBERHOME}/amber.sh
 
 	emake test
 }
 
+  <<<<<<< random
 src_install() {
 	local x
+  =======
+src_compile() {
+	emake \
+		CC=$(tc-getCC) \
+		FC=$(tc-getFC)
+}
+
+src_install() {
+  >>>>>>> ambertools
 	for x in bin/*
 	do
 		[ ! -d ${x} ] && dobin ${x}
@@ -144,12 +177,17 @@ src_install() {
 	dodir /usr/share/${PN}/bin
 	cd "${ED}/usr/bin" || die
 	for x in *
+  <<<<<<< random
 	do
 		dosym ../../../bin/${x} /usr/share/${PN}/bin/${x}
+  =======
+		do dosym /usr/bin/${x} ../share/${PN}/bin/${x}
+  >>>>>>> ambertools
 	done
 	cd "${S}" || die
 
 	dodoc doc/Amber15.pdf
+  <<<<<<< random
 
 	dolib.a  lib/*.a
 	dolib.so lib/*.so
@@ -178,6 +216,13 @@ src_install() {
 	insinto /usr/include/${PN}
 	doins include/*
 
+  =======
+	dolib.a lib/*{.a,.so}
+	insinto /usr/$(get_libdir)
+	doins -r lib/python2.7
+	insinto /usr/include/${PN}
+	doins include/*
+  >>>>>>> ambertools
 	insinto /usr/share/${PN}
 	doins -r dat
 	cd AmberTools || die
