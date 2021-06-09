@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit perl-module
 
@@ -21,4 +20,4 @@ RDEPEND="
 	virtual/perl-Time-HiRes
 	"
 DEPEND="${RDEPEND}
-	virtual/perl-Module-Build"
+	dev-perl/Module-Build"

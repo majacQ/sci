@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -20,3 +19,5 @@ IUSE=""
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
 	dev-python/cython[${PYTHON_USEDEP}]"
+
+# has file collision with sci-biology/RSeQC

@@ -1,12 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI=5
 
 inherit eutils toolchain-funcs
 
-DESCRIPTION="Static analysis of the numerical variables of a program by Abstract Interpretation"
+DESCRIPTION="Static analysis of the numerical variables by Abstract Interpretation"
 HOMEPAGE="http://apron.cri.ensmp.fr/library/"
 SRC_URI="http://apron.cri.ensmp.fr/library/${P}.tgz"
 

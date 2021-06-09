@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,7 +7,7 @@ inherit eutils
 
 MYPN=MC-TESTER
 
-DESCRIPTION="A universal tool for comparisons of Monte Carlo predictions in High Energy Physics"
+DESCRIPTION="Comparisons of Monte Carlo predictions in High Energy Physics"
 HOMEPAGE="http://mc-tester.web.cern.ch/MC-TESTER/"
 SRC_URI="http://mc-tester.web.cern.ch/MC-TESTER/${MYPN}-${PV}.tar.gz"
 LICENSE="CPC GPL-2+"

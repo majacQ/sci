@@ -1,12 +1,11 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit eutils multilib toolchain-funcs
 
-DESCRIPTION="Material eXplorer using DFT, NC pseudopotentials, and pseudo-atomic localized basis functions"
+DESCRIPTION="Material eXplorer"
 HOMEPAGE="http://www.openmx-square.org/"
 SRC_URI="
 	http://www.openmx-square.org/${PN}${PV}.tar.gz

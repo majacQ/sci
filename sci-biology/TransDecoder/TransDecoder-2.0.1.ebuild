@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -46,14 +45,14 @@ src_compile(){
 
 # avoid fetching 1.5TB "${S}"/pfam/Pfam-AB.hmm.bin, see
 # "Re: [Transdecoder-users] Announcement: Transdecoder release r20140704"
-# thread in archives. You can get it from 
+# thread in archives. You can get it from
 # http://downloads.sourceforge.net/project/transdecoder/Pfam-AB.hmm.bin
 
 src_install(){
 	dobin TransDecoder.Predict TransDecoder.LongOrfs
 	insinto /usr/share/${PN}/util
 	doins util/*.pl
-	chmod -R a+rx "${D}"/usr/share/${PN}/util
+	chmod -R a+rx "${D}"/"${EPREFIX}"/usr/share/${PN}/util || die
 	# zap the bundled cdhit binaries copied from transdecoder_plugins/cdhit/ to util/bin
 	rm -rf util/bin
 	#

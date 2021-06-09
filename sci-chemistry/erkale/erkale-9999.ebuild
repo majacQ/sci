@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit cmake-utils flag-o-matic git-r3 multibuild toolchain-funcs
 
@@ -18,18 +17,19 @@ IUSE="openmp"
 RDEPEND="
 	sci-libs/gsl
 	sci-libs/hdf5
-	sci-libs/libint
+	sci-libs/libint:2
 	>=sci-libs/libxc-2.0.0
 "
-DEPEND="${DEPEND}
+DEPEND="
 	>=sci-libs/armadillo-4[blas,lapack]
+	virtual/pkgconfig
 	${RDEPEND}
 "
 
 MULTIBUILD_VARIANTS=( serial )
-use openmp && MULTIBUILD_VARIANTS+=( omp )
 
 src_prepare() {
+	use openmp && MULTIBUILD_VARIANTS+=( omp )
 	append-cxxflags "-DARMA_DONT_USE_ATLAS -DARMA_DONT_USE_WRAPPER"
 	cmake-utils_src_prepare
 }

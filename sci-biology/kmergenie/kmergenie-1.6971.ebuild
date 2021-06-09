@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,7 +7,7 @@ inherit eutils
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
-DESCRIPTION="Estimate best k-mer length to be used in novo assemblies (default set during compilation is 121)"
+DESCRIPTION="Estimate best k-mer length to be used in novo assemblies"
 HOMEPAGE="http://kmergenie.bx.psu.edu/"
 SRC_URI="http://kmergenie.bx.psu.edu/"${P}".tar.gz"
 

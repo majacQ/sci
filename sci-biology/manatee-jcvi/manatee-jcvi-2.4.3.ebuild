@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-DESCRIPTION="genome annotation tool: view, modify, and store annotation for prokaryotic and eukaryotic genomes"
+DESCRIPTION="Genome annotation tool"
 HOMEPAGE="http://manatee.sourceforge.net/jcvi/downloads.shtml"
 SRC_URI="http://downloads.sourceforge.net/project/manatee/manatee/manatee-2.4.3/manatee-2.4.3.tgz"
 

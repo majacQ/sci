@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-DESCRIPTION="Short-read trimmer, assembler, scaffolder in PERL using the 3'-most k-mers"
+DESCRIPTION="Short-read trimmer, OLC assembler, scaffolder in PERL using the 3'-most k-mers"
 HOMEPAGE="http://www.bcgsc.ca/platform/bioinfo/software/ssake"
 SRC_URI="http://www.bcgsc.ca/platform/bioinfo/software/ssake/releases/${PV}/ssake_v3-8-2.tar.gz"
 

@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,7 +7,7 @@ inherit eutils eutils toolchain-funcs
 
 [ "$PV" == "9999" ] && inherit git-r3
 
-DESCRIPTION="Windowed adaptive quality-based trimming tool for FASTQ data from Illumina/Solexa"
+DESCRIPTION="Windowed adaptive quality-based trimming tool for FASTQ data"
 HOMEPAGE="https://github.com/najoshi/sickle"
 if [ "$PV" == "9999" ]; then
 	EGIT_REPO_URI="https://github.com/najoshi/sickle"

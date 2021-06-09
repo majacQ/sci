@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -44,7 +43,7 @@ src_install(){
 	#  *  Note: Bugs should be filed for the respective maintainers
 	#  *  of the package in question and not hardened@g.o.
 	#  * RWX --- --- usr/lib64/libffindex.so.0.1
-	# 
+	#
 	dolib libffindex.so.0.1 libffindex.so
 
 	# make install INSTALL_DIR="${DESTDIR}" HAVE_MPI=1

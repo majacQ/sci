@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # @ECLASS: mpi.eclass
 # @MAINTAINER:
@@ -17,8 +16,8 @@ if [[ ! ${_MPI_ECLASS} ]]; then
 
 case ${EAPI:-0} in
 	2|3|4|5)
-		inherit multilib
-		;;
+		inherit multilib ;;
+	6) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 
@@ -55,6 +54,9 @@ __MPI_ALL_CLASSABLE_PNS="mpich openmpi mpich2 lam-mpi"
 mpi_classed() {
 	[[ ${CATEGORY} == mpi-* ]]
 }
+
+#empi has no support for multilib yet
+mpi_classed && [[ ${_MULTILIB_BUILD} ]] && REQUIRED_USE="abi_x86_64? ( !abi_x86_32 )"
 
 # @FUNCTION: mpi_class
 # @RETURN: The name of the current class, or nothing if unclassed.

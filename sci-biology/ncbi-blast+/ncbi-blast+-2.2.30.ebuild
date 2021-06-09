@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -26,7 +25,7 @@ SLOT="0"
 IUSE="
 	debug static-libs static threads pch
 	test wxwidgets odbc
-	berkdb boost bzip2 cppunit curl expat fastcgi fltk freetype gif
+	berkdb boost bzip2 cppunit curl expat fltk freetype gif
 	glut gnutls hdf5 icu jpeg lzo mesa mysql muparser opengl pcre png python
 	sablotron sqlite tiff xerces xalan xml xpm xslt X"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
@@ -44,11 +43,10 @@ DEPEND="
 	sqlite? ( dev-db/sqlite:3 )
 	mysql? ( virtual/mysql )
 	fltk? ( x11-libs/fltk )
-	opengl? ( virtual/opengl media-libs/glew )
+	opengl? ( virtual/opengl media-libs/glew:0= )
 	mesa? ( media-libs/mesa[osmesa] )
 	glut? ( media-libs/freeglut )
 	freetype? ( media-libs/freetype )
-	fastcgi? ( www-apache/mod_fastcgi )
 	gnutls? ( net-libs/gnutls )
 	python? ( ${PYTHON_DEPS} )
 	cppunit? ( dev-util/cppunit )
@@ -241,7 +239,6 @@ src_configure() {
 	$(use_with wxwidgets wxwidgets "${EPREFIX}/usr")
 	$(use_with wxwidgets wxwidgets-ucs)
 	$(use_with freetype freetype "${EPREFIX}/usr")
-	$(use_with fastcgi fastcgi "${EPREFIX}/usr")
 #	$(use_with berkdb bdb "${EPREFIX}/usr") # not in ncbi-blast+
 	$(usex odbc --with-odbc="${EPREFIX}/usr" "")
 	$(use_with python python "${EPREFIX}/usr")
@@ -313,17 +310,17 @@ src_compile() {
 	# only in --with-flat-makefile configurations.  For now (12.0.0), you'll need to
 	# add or extend more DLL_LIB settings, to which end you may find the
 	# resources at http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/
-	# helpful.  For instance, 
-	# 
+	# helpful.  For instance,
+	#
 	# http://www.ncbi.nlm.nih.gov/IEB/ToolBox/CPP_DOC/depgraphs/dbapi_driver.html
-	# 
+	#
 	# indicates that src/dbapi/driver/Makefile.dbapi_driver.lib should set
-	# 
+	#
 	# DLL_LIB = xncbi
-	# 
+	#
 	# (You can find the path to that makefile by examining
 	# .../status/.dbapi_driver.dep or .../build/Makefile.flat.)
-	# 
+	#
 	# To take full advantage of --with-flat-makefile, you'll need the following (instead of 'emake all_p -C "${S}"_build/build') and call configure --with-flat-makefile:
 	emake -C "${S}"_build/build -f Makefile.flat
 }

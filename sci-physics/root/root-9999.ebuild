@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -91,7 +90,7 @@ CDEPEND="
 			mpi? ( virtual/mpi )
 		)
 		mysql? ( virtual/mysql )
-		odbc? ( || ( dev-db/libiodbc:0= dev-db/unixODBC:0= ) )
+		odbc? ( || ( dev-db/libiodbc:0 dev-db/unixODBC:0 ) )
 		oracle? ( dev-db/oracle-instantclient-basic:0= )
 		postgres? ( dev-db/postgresql:= )
 		pythia6? ( sci-physics/pythia:6= )
@@ -397,6 +396,10 @@ cleanup_install() {
 }
 
 src_install() {
+	# Write access to /dev/random is required to run root.exe
+	# More information at https://sft.its.cern.ch/jira/browse/ROOT-8146
+	addwrite /dev/random
+
 	DOCS=($(find README/* -maxdepth 1 -type f))
 	default
 	dodoc README.md

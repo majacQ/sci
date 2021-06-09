@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,7 +8,7 @@ MY_PV="${PV/_}" # convert from mira-4.0_rc2 (Gentoo ebuild filename derived) to 
 
 inherit autotools eutils multilib
 
-DESCRIPTION="Whole Genome Shotgun and EST Sequence Assembler for Sanger, 454 and Solexa / Illumina"
+DESCRIPTION="Whole Genome Shotgun and EST Sequence Assembler"
 HOMEPAGE="http://www.chevreux.org/projects_mira.html"
 SRC_URI="
 	http://sourceforge.net/projects/mira-assembler/files/MIRA/development/"${PN}"-"${MY_PV}".tar.bz2

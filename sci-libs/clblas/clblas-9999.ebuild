@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -46,24 +45,25 @@ pkg_pretend() {
 		fi
 	fi
 
-	if [ ! -d "/usr/local/include/CL" ]; then
+	if [ ! -d "${EPREFIX}/usr/include/CL" ]; then
 		eerror "As a temporary workaround for Bug #521734, a symlink pointing to"
 		eerror "OpenCL headers >= 1.2 is needed. A symlink pointing to the CL-1.2"
-		eerror "headers, provided by the eselect-opencl package, can be created with"
+		eerror "headers, normally provided by the eselect-opencl package, can be"
+		eerror "manually created with"
 		eerror ""
-		eerror "  ln -s /usr/lib64/OpenCL/global/include/CL-1.2/ /usr/local/include/CL"
+		eerror "  ln -s ${EPREFIX}/usr/lib64/OpenCL/global/include/CL-1.2/ ${EPREFIX}/usr/include/CL"
 		eerror ""
-		die "/usr/local/include/CL not found"
+		die "${EPREFIX}/usr/include/CL not found"
 	fi
 }
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_build client CLIENT)
-		$(cmake-utils_use_build examples SAMPLE)
-		$(cmake-utils_use_build ktest KTEST)
-		$(cmake-utils_use_build performance PERFORMANCE)
-		$(cmake-utils_use_build test TEST)
+		-DBUILD_CLIENT="$(usex client)"
+		-DBUILD_SAMPLE="$(usex examples)"
+		-DBUILD_KTEST="$(usex ktest)"
+		-DBUILD_PERFORMANCE="$(usex performance)"
+		-DBUILD_TEST="$(usex test)"
 		-DOPENCL_ROOT="/usr/local/include"
 	)
 	cmake-utils_src_configure

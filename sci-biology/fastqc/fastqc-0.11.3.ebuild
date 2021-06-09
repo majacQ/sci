@@ -1,12 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit java-pkg-2 eutils java-ant-2
 
-DESCRIPTION="Perl-based wrapper around java apps to quality control FASTA/FASTQ sequence files"
+DESCRIPTION="Quality control FASTA/FASTQ sequence files"
 HOMEPAGE="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/"
 SRC_URI="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v"${PV}"_source.zip"
 
@@ -41,7 +40,7 @@ src_install(){
 	# .class files (a jar file is just a zip file full of .class files).  All
 	# you need to copy out is the contents of the bin subdirectory, the rest of
 	# the download you can discard.
-	# 
+	#
 	# jbzip2-0.9.jar comes from https://code.google.com/p/jbzip2
 	#
 	# ignore the sam-1.103.jar and rely on /usr/share/picard/lib/sam.jar from sci-biology/picard

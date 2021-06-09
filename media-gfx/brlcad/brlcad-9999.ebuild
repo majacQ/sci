@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit cmake-utils eutils subversion java-pkg-2 flag-o-matic
@@ -100,7 +99,7 @@ src_install() {
 	dodoc AUTHORS NEWS README HACKING TODO BUGS ChangeLog
 	echo "PATH=\"${BRLCAD_DIR}/bin\"" >  99brlcad
 	echo "MANPATH=\"${BRLCAD_DIR}/man\"" >> 99brlcad
-	doenvd 99brlcad || die
+	doenvd 99brlcad
 	newicon misc/macosx/Resources/ReadMe.rtfd/brlcad_logo_tiny.png brlcad.png
 	make_desktop_entry mged "BRL-CAD" brlcad "Graphics;Engineering"
 }

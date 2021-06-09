@@ -1,6 +1,5 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -20,8 +19,7 @@ KEYWORDS="-* ~amd64 ~x86 ~amd64-linux ~x86-linux"
 
 DEPEND=">=dev-libs/intel-common-13.1[compiler,${MULTILIB_USEDEP}]"
 RDEPEND="${DEPEND}
-	virtual/jre
-	eclipse? ( dev-util/eclipse-sdk )"
+	virtual/jre"
 
 INTEL_BIN_RPMS=( idb )
 INTEL_DAT_RPMS=( idb-common idbcdt )

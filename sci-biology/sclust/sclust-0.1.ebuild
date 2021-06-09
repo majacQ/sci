@@ -1,10 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-DESCRIPTION="seeded clustering tool by processing pairwise alignments from TIGR Gene Indices project tools"
+DESCRIPTION="Seeded clustering tool by processing pairwise alignments"
 HOMEPAGE="http://compbio.dfci.harvard.edu/tgi/software/"
 SRC_URI="
 	ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/tgicl/${PN}.tar.gz

@@ -1,12 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit toolchain-funcs
 
-DESCRIPTION="De novo short read assembler"
+DESCRIPTION="De novo short read OLC assembler (overlap-layout-consensus)"
 HOMEPAGE="http://www.genomic.ch/edena.php"
 SRC_URI="http://www.genomic.ch/edena/EdenaV"${PV}".tar.gz"
 

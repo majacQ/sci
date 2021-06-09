@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # boinc support is BROKEN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -11,7 +10,7 @@ inherit eutils multilib prefix scons-utils toolchain-funcs versionator
 #MY_P="${PN}$(get_major_version)_source"
 MY_P="${PN}${PV}_source"
 
-DESCRIPTION="Prediction and design of protein structures, folding mechanisms, and protein-protein interactions"
+DESCRIPTION="Prediction of protein structures and protein-protein interactions"
 HOMEPAGE="http://www.rosettacommons.org/"
 SRC_URI="${MY_P}.tgz patch_rosetta3.4_to_CSROSETTA3_ver1.3.txt"
 

@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -12,7 +11,7 @@ SRC_URI="http://why.lri.fr/download/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 IUSE="apron coq doc examples float gappa frama-c gtk pff why3"
 
 DEPEND=">=dev-lang/ocaml-3.12.1

@@ -1,10 +1,14 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit cmake-utils eutils multilib
+
+# deal.II uses its own FindLAPACK.cmake file that calls into the system
+# FindLAPACK.cmake module and does additional internal setup. Do not remove
+# any of these modules:
+CMAKE_REMOVE_MODULES_LIST=""
 
 DESCRIPTION="Solving partial differential equations with the finite element method"
 HOMEPAGE="http://www.dealii.org/"
@@ -21,8 +25,6 @@ else
 		doc? (
 			https://github.com/${PN}/${PN}/releases/download/v${MY_PV}/${MY_P}-offline_documentation.tar.gz
 			-> ${P}-offline_documentation.tar.gz
-			http://ganymed.iwr.uni-heidelberg.de/~maier/dealii/releases/${MY_P}-offline_documentation.tar.gz
-			-> ${P}-offline_documentation.tar.gz
 			)"
 	KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
 	S="${WORKDIR}/${PN}-${MY_PV}"
@@ -32,8 +34,8 @@ LICENSE="LGPL-2.1+"
 SLOT="0"
 IUSE="
 	arpack cpu_flags_x86_avx cpu_flags_x86_sse2 c++11 +debug doc +examples
-	hdf5 +lapack metis mpi muparser opencascade netcdf p4est parameter_gui
-	petsc +sparse static-libs +tbb trilinos
+	+gsl hdf5 +lapack metis mpi muparser opencascade netcdf p4est petsc
+	+sparse static-libs +tbb trilinos
 "
 
 # TODO: add slepc use flag once slepc is packaged for gentoo-science
@@ -45,6 +47,7 @@ RDEPEND="dev-libs/boost
 	app-arch/bzip2
 	sys-libs/zlib
 	arpack? ( sci-libs/arpack[mpi=] )
+	gsl? ( sci-libs/gsl )
 	hdf5? ( sci-libs/hdf5[mpi=] )
 	lapack? ( virtual/lapack )
 	metis? ( >=sci-libs/parmetis-4 )
@@ -53,7 +56,6 @@ RDEPEND="dev-libs/boost
 	netcdf? ( sci-libs/netcdf-cxx:0 )
 	opencascade? ( sci-libs/opencascade:* )
 	p4est? ( sci-libs/p4est[mpi] )
-	parameter_gui? ( dev-qt/qtgui:4 )
 	petsc? ( sci-mathematics/petsc[mpi=] )
 	sparse? ( sci-libs/umfpack )
 	tbb? ( dev-cpp/tbb )
@@ -76,6 +78,7 @@ src_configure() {
 		-DDEAL_II_LIBRARY_RELDIR="$(get_libdir)"
 		-DDEAL_II_SHARE_RELDIR="share/${PN}"
 		-DDEAL_II_DOCREADME_RELDIR="share/doc/${P}"
+		-DDEAL_II_DOCHTML_RELDIR="share/doc/${P}/html"
 		-DDEAL_II_EXAMPLES_RELDIR="share/doc/${P}/examples"
 		-DDEAL_II_WITH_BZIP2=ON
 		-DDEAL_II_WITH_ZLIB=ON
@@ -85,6 +88,7 @@ src_configure() {
 		$(cmake-utils_use cpu_flags_x86_sse2 DEAL_II_HAVE_SSE2)
 		$(cmake-utils_use doc DEAL_II_COMPONENT_DOCUMENTATION)
 		$(cmake-utils_use examples DEAL_II_COMPONENT_EXAMPLES)
+		$(cmake-utils_use gsl DEAL_II_WITH_GSL)
 		$(cmake-utils_use hdf5 DEAL_II_WITH_HDF5)
 		$(cmake-utils_use lapack DEAL_II_WITH_LAPACK)
 		$(cmake-utils_use metis DEAL_II_WITH_METIS)
@@ -94,7 +98,6 @@ src_configure() {
 		-DOPENCASCADE_DIR="${CASROOT}"
 		$(cmake-utils_use opencascade DEAL_II_WITH_OPENCASCADE)
 		$(cmake-utils_use p4est DEAL_II_WITH_P4EST)
-		$(cmake-utils_use parameter_gui DEAL_II_COMPONENT_PARAMETER_GUI)
 		$(cmake-utils_use petsc DEAL_II_WITH_PETSC)
 		$(cmake-utils_use sparse DEAL_II_WITH_UMFPACK)
 		$(cmake-utils_use !static-libs BUILD_SHARED_LIBS)

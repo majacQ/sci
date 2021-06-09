@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -20,7 +19,7 @@ DEPEND="${RDEPEND}
 	app-arch/unzip
 "
 
-S="${WORKDIR}/${PN}${PV}/src"
+S="${WORKDIR}/${PN}${MY_PV}/src"
 
 src_prepare() {
 	emake distclean PLATFORM=octave
@@ -33,5 +32,5 @@ src_compile() {
 src_install() {
 	emake install PLATFORM=octave
 	insinto "$(octave-config --m-site-dir)/${P}"
-	doins -r "${WORKDIR}/${PN}${PV}"/*
+	doins -r "${WORKDIR}/${PN}${MY_PV}"/*
 }

@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -23,6 +22,7 @@ src_prepare() {
 src_install() {
 	dobin grappa
 	dosym grappa /usr/bin/invdist
-	dosym grappa /usr/bin/distmat
+	# avoid file collision with emboss and rename distmat to distmat_grappa
+	dosym grappa /usr/bin/distmat_grappa
 	dodoc README
 }

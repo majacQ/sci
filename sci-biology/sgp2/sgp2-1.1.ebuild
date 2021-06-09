@@ -1,12 +1,11 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit eutils
 
-DESCRIPTION="Find ORFs by comparing two genomic/EST sequences using tblastx and geneid ab initio predictions"
+DESCRIPTION="Find ORFs by comparing two genomic/EST sequences"
 HOMEPAGE="http://genome.crg.es/software/sgp2/"
 SRC_URI="ftp://genome.crg.es/pub/software/sgp2/sgp2_v1.1.May_8_2012.tar.gz"
 

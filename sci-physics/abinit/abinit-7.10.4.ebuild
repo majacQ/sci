@@ -1,14 +1,13 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_5,2_6,2_7} )
+PYTHON_COMPAT=( python2_7 )
 
 inherit autotools-utils eutils flag-o-matic fortran-2 multilib python-single-r1 toolchain-funcs
 
-DESCRIPTION="Find total energy, charge density and electronic structure using density functional theory"
+DESCRIPTION="Total energy, charge density and electronic structure using DFT"
 HOMEPAGE="http://www.abinit.org/"
 SRC_URI="http://ftp.abinit.org/${P}.tar.gz"
 

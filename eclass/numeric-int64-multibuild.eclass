@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # @ECLASS: numeric-int64-multilib.eclass
 # @MAINTAINER:
@@ -19,8 +18,8 @@ if [[ ! ${_NUMERIC_INT64_MULTILIB_ECLASS} ]]; then
 # EAPI=5 is required for meaningful MULTILIB_USEDEP.
 case ${EAPI:-0} in
 	5)
-		inherit multilib
-		;;
+		inherit multilib ;;
+	6) ;;
 	*) die "EAPI=${EAPI} is not supported" ;;
 esac
 

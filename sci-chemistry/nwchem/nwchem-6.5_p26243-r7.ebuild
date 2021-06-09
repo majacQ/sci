@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -193,8 +192,8 @@ src_compile() {
 		lapackpkg="lapack-int64"
 	fi
 	use blas && export BLASOPT="$($(tc-getPKG_CONFIG) --libs ${blaspkg})"
-	use lapack && export BLASOPT+="$($(tc-getPKG_CONFIG) --libs ${lapackpkg})"
-	use scalapack && export BLASOPT+="$($(tc-getPKG_CONFIG) --libs scalapack)"
+	use lapack && export BLASOPT+=" $($(tc-getPKG_CONFIG) --libs ${lapackpkg})"
+	use scalapack && export BLASOPT+=" $($(tc-getPKG_CONFIG) --libs scalapack)"
 	if use cuda; then
 		export TCE_CUDA=Y
 		export CUDA_PATH=/opt/cuda

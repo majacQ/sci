@@ -1,7 +1,10 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<herd>sci</herd>
+	<maintainer type="project">
+		<email>sci@gentoo.org</email>
+		<name>Gentoo Science Project</name>
+	</maintainer>
 	<longdescription lang="en">
 		The Unified Form Language (UFL) is a domain specific language for
 		declaration of finite element discretizations of variational forms. More
@@ -9,9 +12,6 @@
 		spaces and defining expressions for weak forms in a notation close to
 		mathematical notation.
 	</longdescription>
-	<use>
-		<flag name="scipy">Adds support for evaluating Bessel functions using <pkg>dev-python/scipy</pkg></flag>
-	</use>
 	<upstream>
 		<remote-id type="bitbucket">fenics-project/ufl</remote-id>
 		<remote-id type="launchpad">ufl</remote-id>

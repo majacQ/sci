@@ -1,6 +1,5 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -238,10 +237,4 @@ src_install() {
 		dodoc docs/manual.pdf
 		dohtml -r docs/*.html docs/changes docs/manualpages
 	fi
-}
-
-pkg_postinst() {
-	elog "The petsc ebuild is still under development."
-	elog "Help us improve the ebuild in:"
-	elog "http://bugs.gentoo.org/show_bug.cgi?id=53386"
 }

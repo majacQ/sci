@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -17,9 +16,10 @@ IUSE="cpu_flags_x86_sse2"
 
 # http://ugene.net/download.html states Qt5.4 and QtWebkit but:
 #   Project MESSAGE: Cannot build Unipro UGENE with Qt version 4.8.7
-#   Project ERROR: Use at least Qt 5.2.1. 
+#   Project ERROR: Use at least Qt 5.2.1.
 DEPEND="
-	>=dev-qt/qtgui-5.2.1"
+	>=dev-qt/qtgui-5.2.1
+	>=dev-qt/qtscript-5.2.1[scripttools]"
 RDEPEND="${DEPEND}"
 
 LANGS="cs en ru zh"

@@ -1,15 +1,14 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
-DESCRIPTION="SSAHA2-based pipeline to align reads into format also understood by samtools, maq"
+DESCRIPTION="SSAHA2-based pipeline to align reads"
 HOMEPAGE="http://www.sanger.ac.uk/resources/software/ssaha2/"
 SRC_URI="ftp://ftp.sanger.ac.uk/pub4/resources/software/ssaha2/pileup.tgz"
 
 # http://samtools.sourceforge.net/pileup.shtml
-# 
+#
 LICENSE="GRL"
 SLOT="0"
 KEYWORDS=""
@@ -48,14 +47,14 @@ src_compile(){
 
 src_install(){
 	cd ssaha_pileup/ssaha_pileup || die "Cannot cd to "${S}"ssaha_pileup/ssaha_pileup"
-	dobin ssaha_pileup ssaha_solexa ssaha_pairs ssaha_clean ssaha_mates ssaha_cigar ssaha_indel view_pileup ssaha_reads ssaha_merge ssaha_check-cigar || die "dobin failed"
+	dobin ssaha_pileup ssaha_solexa ssaha_pairs ssaha_clean ssaha_mates ssaha_cigar ssaha_indel view_pileup ssaha_reads ssaha_merge ssaha_check-cigar "dobin failed"
 
 	cd "${S}" || die
 	for f in ssaha_pileup/other_codes/get_seqreads/get_seqreads \
 		ssaha_pileup/other_codes/ssaha_split/ssaha_split \
 		ssaha_pileup/other_codes/ssaha_parseSNP/ssaha_parseSNP \
 		ssaha_pileup/other_codes/search_read/search_read; do
-			dobin $f || die "dobin failed"
+			dobin $f "dobin failed"
 	done
 
 	# TODO:
