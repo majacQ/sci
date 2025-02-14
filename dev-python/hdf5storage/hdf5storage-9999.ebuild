@@ -1,8 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-PYTHON_COMPAT=( python3_{7..9} )
+EAPI=8
+PYTHON_COMPAT=( python3_{10..11} )
+DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1
 
@@ -28,4 +29,4 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-distutils_enable_tests nose
+distutils_enable_tests pytest

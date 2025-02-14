@@ -1,9 +1,9 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit java-pkg-2 java-ant-2
+inherit java-pkg-2
 
 DESCRIPTION="Illumina adapter trimming tool"
 HOMEPAGE="http://www.usadellab.org/cms/?page=trimmomatic"
@@ -15,16 +15,23 @@ SRC_URI="
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
-DEPEND=">=virtual/jdk-1.6:*
-	dev-java/ant-core
+DEPEND=">=virtual/jdk-1.7:*
 	app-arch/unzip"
-RDEPEND=">=virtual/jre-1.6:*"
+RDEPEND=">=virtual/jre-1.7:*"
 
-# somehow fails to build with oracle-jdk-bin-1.7 while ibm-jdk-bin-1.6 works
+src_prepare() {
+	sed -i -E 's/source="[0-9\.]+"//g' build.xml || die
+	sed -i -E 's/target="[0-9\.]+"//g' build.xml || die
+	default
+}
 
-EANT_BUILD_TARGET="dist"
+src_compile() {
+	eant dist \
+		-Dant.build.javac.source="$(java-pkg_get-source)" \
+		-Dant.build.javac.target="$(java-pkg_get-target)"
+}
 
 src_install() {
 	java-pkg_newjar "dist/jar/${P}.jar" "${PN}.jar"

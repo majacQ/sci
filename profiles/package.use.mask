@@ -15,19 +15,6 @@
 ## =media-video/mplayer-0.90_pre5-r1 foo
 #
 
-# Benda Xu <heroxbd@gentoo.org> (24 Jan 2021)
-# It doesn't work, mask 30 days for removal, unless someone come up
-# with a fix. cf. https://github.com/gentoo/sci/issues/1011
-sci-libs/pytorch mkl
-
-# Andrew Savchenko <bircoph@gentoo.org> (02 Jun 2016)
-# doesn't link with plotutils-2.6
-sci-physics/qcl plotutils
-
-# Christoph Junghans <ottxor@gentoo.org> (12 Sep 2014)
-# icc and ifc don't work on no-multilib
-sci-biology/estscan icc ifc
-
-# Christoph Junghans <ottxor@gentoo.org> (05 Nov 2013)
-# gui sandbox error
-dev-lang/conceptual gui
+# Nowa Ammerlaan <nowa@gentoo.org> (23 Aug 2022)
+# vtk<9 no longer available in ::gentoo
+sci-libs/gdcm python

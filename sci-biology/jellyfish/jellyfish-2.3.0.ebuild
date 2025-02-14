@@ -1,12 +1,10 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-
-inherit flag-o-matic autotools
+EAPI=8
 
 DESCRIPTION="k-mer counter within reads for assemblies"
-HOMEPAGE="http://www.genome.umd.edu/jellyfish.html"
+HOMEPAGE="https://genome.umd.edu/jellyfish.html"
 SRC_URI="https://github.com/gmarcais/Jellyfish/releases/download/v${PV}/${P}.tar.gz"
 
 # older version is hidden in trinityrnaseq_r20140413p1/trinity-plugins/jellyfish-1.1.11
@@ -16,14 +14,12 @@ SLOT="2"
 KEYWORDS="~amd64 ~x86"
 IUSE="cpu_flags_x86_sse"
 
-DEPEND=""
+RDEPEND="
+	sci-biology/samtools:0
+	sci-libs/htslib
+"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
-
-src_prepare(){
-	eautoreconf
-	default
-}
 
 # TODO: enable compilation of Bindings to Ruby, Python and Perl
 # '--enable-ruby-binding', '--enable-python-binding' or '--enable-perl-binding',  '--enable-swig'

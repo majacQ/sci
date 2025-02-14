@@ -1,12 +1,12 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_10 )
 LUA_COMPAT=( lua5-{1..3} )
 
-inherit lua-single toolchain-funcs cmake python-single-r1
+inherit lua-single cmake python-single-r1
 
 MY_PN="SimpleITK"
 
@@ -16,7 +16,6 @@ SRC_URI="
 	https://github.com/SimpleITK/SimpleITK/releases/download/v${PV}/SimpleITK-${PV}.tar.gz
 	https://github.com/SimpleITK/SimpleITK/releases/download/v${PV}/SimpleITKData-${PV}.tar.gz
 "
-RESTRICT="primaryuri"
 
 LICENSE="Apache-2.0"
 SLOT="0"

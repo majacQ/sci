@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake multilib
+inherit cmake
 
 DESCRIPTION="High Performance Visualizations for ArrayFire"
 HOMEPAGE="http://www.arrayfire.com/"
@@ -33,7 +33,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="
 	doc? (
-		app-doc/doxygen
+		app-text/doxygen
 		dev-python/breathe
 		dev-python/recommonmark
 		dev-python/sphinx

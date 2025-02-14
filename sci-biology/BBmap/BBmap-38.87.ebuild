@@ -1,9 +1,9 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit java-pkg-2 java-ant-2
+inherit java-pkg-2
 
 DESCRIPTION="Short read aligner, K-mer-based error-correct and normalize, FASTA/Q tool"
 HOMEPAGE="https://sourceforge.net/projects/bbmap/"
@@ -32,7 +32,7 @@ src_prepare(){
 }
 
 src_compile(){
-	ant dist || die
+	eant dist
 }
 
 src_install(){

@@ -1,19 +1,19 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit java-pkg-2 java-utils-2
+inherit java-pkg-2
 
 MY_P=${PN}${PV//.}
 
 DESCRIPTION="Java interface to WordNet dictionary data"
 HOMEPAGE="https://sourceforge.net/projects/jwordnet/"
-SRC_URI="mirror://sourceforge/jwordnet/${MY_P//_rc/-rc}.zip"
+SRC_URI="https://downloads.sourceforge.net/jwordnet/${MY_P//_rc/-rc}.zip"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64"
 
 COMMON_DEP="
 	dev-java/commons-logging:0

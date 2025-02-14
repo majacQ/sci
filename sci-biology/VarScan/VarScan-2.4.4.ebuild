@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit java-pkg-2
 
@@ -18,9 +18,11 @@ KEYWORDS="~amd64"
 
 DEPEND="
 	>=virtual/jdk-1.5:*
-	!sci-biology/VarScan-bin"
+"
 RDEPEND=">=virtual/jre-1.5:*
-	sci-biology/bam-readcount"
+	sci-biology/bam-readcount
+	!sci-biology/VarScan-bin
+"
 
 S="${WORKDIR}"/net/sf/varscan
 

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake multilib
+inherit cmake
 
 DESCRIPTION="general purpose GPU library"
 HOMEPAGE="https://arrayfire.com/"
@@ -44,7 +44,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	doc? ( app-doc/doxygen )
+	doc? ( app-text/doxygen )
 	virtual/pkgconfig
 "
 

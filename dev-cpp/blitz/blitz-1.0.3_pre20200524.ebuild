@@ -1,14 +1,12 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{7..9} )
-
+PYTHON_COMPAT=( python3_{10..11} )
 inherit cmake python-any-r1
 
 COMMIT="39f885951a9b8b11f931f917935a16066a945056"
-
 DESCRIPTION="Multi-dimensional array library for C++"
 HOMEPAGE="https://github.com/blitzpp/blitz"
 SRC_URI="https://github.com/blitzpp/blitz/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
@@ -22,10 +20,10 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="
 	${PYTHON_DEPS}
-	doc? ( app-doc/doxygen[dot] )
+	doc? ( app-text/doxygen[dot] )
 "
 DEPEND="
-	boost? ( dev-libs/boost:=[static-libs] )
+	boost? ( dev-libs/boost:= )
 "
 
 src_configure() {

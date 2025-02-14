@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>alexander@neuwirth-informatik.de</email>
+    <name>Alexander Puck Neuwirth</name>
+  </maintainer>
+  <maintainer type="project">
+    <email>sci-physics@gentoo.org</email>
+    <name>Gentoo Physics Project</name>
+  </maintainer>
+  <longdescription lang="en">
+  The OpenLoops 2 program is a fully automated implementation of the Open Loops algorithm combined with on-the-fly reduction methods, which allows for the fast and stable numerical evaluation of tree and one-loop matrix elements for any Standard Model process at NLO QCD and NLO EW.
+  </longdescription>
+  <upstream>
+    <remote-id type="gitlab">openloops/OpenLoops</remote-id>
+  </upstream>
+  <use>
+    <flag name="collier">Build with collier</flag>
+    <flag name="extra">Build libs with extra</flag>
+    <flag name="cuttools">Build with cuttools</flag>
+    <flag name="pplla-ew">Build pp to lla process with EW corrections</flag>
+    <flag name="ppllj">Build pp to llj process</flag>
+    <flag name="pplljj">Build pp to lljj process</flag>
+    <flag name="pplnj-ckm">Build pp to lnj process with ckm matrix</flag>
+    <flag name="pplnjj-ckm">Build pp to lljj process with ckm matrix</flag>
+    <flag name="ppjj">Build pp to jj process</flag>
+    <flag name="ppjjj">Build pp to jjj process</flag>
+    <flag name="ppajj">Build pp to ajj process</flag>
+    <flag name="pphllj-ew">Build pp to hllj process with EW corrections</flag>
+  </use>
+</pkgmetadata>

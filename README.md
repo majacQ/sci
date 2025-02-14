@@ -1,8 +1,7 @@
 # The [Gentoo Science Project](https://wiki.gentoo.org/wiki/Project:Science) Repository    
 [![pkgcheck](https://github.com/gentoo/sci/workflows/pkgcheck/badge.svg)](https://github.com/gentoo/sci/actions?query=workflow%3Apkgcheck)
-[![repoman](https://github.com/gentoo/sci/workflows/repoman/badge.svg)](https://github.com/gentoo/sci/actions?query=workflow%3Arepoman)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/gentoo/sci#guide)
-[![chat on freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg)](https://webchat.freenode.net/#gentoo-science)
+[![chat on libera](https://img.shields.io/badge/chat-on%20libera-brightgreen.svg)](https://web.libera.chat/#gentoo-science)
 
 <table>
 <tr>
@@ -18,6 +17,7 @@
 ### Contents
 
 1. [Installation](#install)
+  - [Eselect](#install-eselect)
   - [Manual](#install-manual)
   - [Layman](#install-layman)
 2. [Usage](#usage)
@@ -29,25 +29,35 @@
 
 ## Installation <a name="install"></a>
 
-### Eselect-repository install <a name="install-eselect"></a>
+As per the current [Portage specification](https://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html), ebuild repositories (a.k.a. overlays) can be managed via file collections under `/etc/portage/repos.conf/`, via the new [plug-in sync system](https://wiki.gentoo.org/wiki/Project:Portage/Sync).
 
-The easiest way to enable the overlay is to:
+### Eselect-repository Install <a name="install-eselect"></a>
+
+The overlay can be enabled via the `repository` extension of the Gentoo `eselect` utility.
+
 ```console
-emerge --noreplace eselect-repository && eselect repository enable science && emerge --sync
+emerge --ask --noreplace --verbose eselect-repository
+eselect repository enable science
 ```
-and emerge the package as usual.
+
+### Eselect-repository Uninstall
+
+To disable and remove the overlay, run:
+
+```console
+eselect repository disable science
+eselect repository remove science
+```
 
 ### Manual Install <a name="install-manual"></a>
 
-As per the current [Portage specifications](https://dev.gentoo.org/~zmedico/portage/doc/man/portage.5.html), ebuild repositories (a.k.a. overlays) can be managed via file collections under `/etc/portage/repos.conf/`, via the new [plug-in sync system](https://wiki.gentoo.org/wiki/Project:Portage/Sync).
-
-To enable the overlay without the need for additional software, you first need to have `git` installed:
+To enable the overlay without the need for dedicated repository software, you need to have `git` installed:
 
 ```console
-emerge --ask --verbose dev-vcs/git
+emerge --ask --noreplace --verbose dev-vcs/git
 ````
 
-Then you need to add the science repository configuration by downloading the [science.conf](metadata/science.conf) file:
+Then you can simply download the science repository configuration file, [science.conf](metadata/science.conf):
 
 ```console
 wget https://gitweb.gentoo.org/proj/sci.git/plain/metadata/science.conf \
@@ -56,7 +66,7 @@ wget https://gitweb.gentoo.org/proj/sci.git/plain/metadata/science.conf \
 
 ### Manual Uninstall
 
-To uninstall the overlay, simply run:
+To disable and remove the overlay, run:
 
 ```console
 rm /etc/portage/repos.conf/science
@@ -68,7 +78,7 @@ rm /var/db/repos/science -rf
 You can also install the overlay via the [layman](https://wiki.gentoo.org/wiki/Layman) overlay manager.
 
 ```console
-emerge --ask --verbose app-portage/layman
+emerge --ask --noreplace --verbose app-portage/layman
 layman --add science
 ```
 
@@ -125,12 +135,7 @@ We welcome new contributors and are happy to include new packages.
 
 ### Areas to contribute
 
-- [Current open issues](https://github.com/gentoo/sci/issues)
 - [Current open bugs](https://bugs.gentoo.org/buglist.cgi?no_redirect=1&quicksearch=[science+overlay])
-- EAPI 6 (or 5) ebuilds which need updating
-```
-find . -type f -name "*.ebuild" ! \( -wholename "*.git*" -o -wholename "*profile*" -o -wholename "*metadata*" \) | while read ff; do grep -lRE "EAPI.*6" /dev/null $ff; done
-```
 
 ### Resources
 
@@ -143,5 +148,5 @@ Additionally, please make sure to add the Science Project as an additional maint
 
 ## Support
 
-You can ask for help on [Freenode IRC](https://www.gentoo.org/get-involved/irc-channels/) in [**#gentoo-science**](http://webchat.freenode.net/?channels=gentoo-science).
-Alternatively you can report bugs on the [GitHub issues page](https://github.com/gentoo/sci/issues).
+You can ask for help on [Libera IRC](https://www.gentoo.org/get-involved/irc-channels/) in [**#gentoo-science**](https://web.libera.chat/#gentoo-science).
+Alternatively you can report bugs on the [Gentoo Bugzilla](https://bugs.gentoo.org/).
